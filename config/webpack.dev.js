@@ -1,43 +1,50 @@
-const path = require("path");
-const { merge } = require("webpack-merge");
-const base = require("./webpack.base.js");
+const path = require('path')
+const { merge } = require('webpack-merge')
+const base = require('./webpack.base.js')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = merge(base, {
-    mode: "development",
+    mode: 'development',
     output: {
-        filename: "main.[contenthash:4].js",
-        path: path.resolve(__dirname, "../_dist"),
-        publicPath: "/",
-        clean: true,
+        filename: 'main.[contenthash:4].js',
+        path: path.resolve(__dirname, '../_dist'),
+        publicPath: '/',
+        clean: true
     },
 
-    devtool: "inline-source-map",
+    devtool: 'inline-source-map',
 
     devServer: {
-        contentBase: "./",
+        contentBase: './',
         compress: true,
         // hot: true,
-        port: 9000,
+        port: 9000
     },
+
+    plugins: [
+        new ESLintPlugin({
+            eslintPath: '../.eslintrc.json'
+        })
+    ],
 
     module: {
         rules: [
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    "style-loader",
-                    "css-loader",
+                    'style-loader',
+                    'css-loader',
                     {
-                        loader: "postcss-loader",
+                        loader: 'postcss-loader',
                         options: {
                             postcssOptions: {
-                                plugins: [["postcss-preset-env", {}]],
-                            },
-                        },
+                                plugins: [['postcss-preset-env', {}]]
+                            }
+                        }
                     },
-                    "sass-loader",
-                ],
-            },
-        ],
-    },
-});
+                    'sass-loader'
+                ]
+            }
+        ]
+    }
+})
