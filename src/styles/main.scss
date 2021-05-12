@@ -3,14 +3,12 @@
 @import "./libs/_libs";
 @import "./elements/_elements";
 @import "./components/_components";
+@import "./sections/_sections";
 
 body {
     font-family: "Roboto";
 }
 
-.img {
-    width: 400px;
-    height: 300px;
-    background-image: url("../assets/images/img.jpg");
-    background-size: cover;
+main {
+    margin-top: 40px;
 }
