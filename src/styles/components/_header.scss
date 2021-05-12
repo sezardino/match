@@ -1,0 +1,21 @@
+.header {
+    padding: 0 24px;
+
+    background-color: var(--blue);
+
+    display: flex;
+    justify-content: space-between;
+
+    min-height: 64px;
+    &__logo {
+        margin: auto 0;
+    }
+
+    &__user {
+        margin: auto 0;
+    }
+
+    &__nav {
+        display: flex;
+    }
+}
