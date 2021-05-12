@@ -1,0 +1,13 @@
+.register-user {
+    &__title {
+        font-weight: 500;
+        font-size: 2rem;
+        line-height: 3rem;
+        letter-spacing: 0.015rem;
+        color: var(--black);
+    }
+
+    &__form {
+        margin-top: 20px;
+    }
+}

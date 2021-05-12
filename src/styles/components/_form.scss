@@ -1,0 +1,33 @@
+.form {
+    &--register {
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__label-text {
+
+    }
+
+    &__input {
+    }
+
+    &__img {
+    }
+
+    &__footer {
+    }
+}

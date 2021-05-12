@@ -13,6 +13,13 @@
         opacity: 0.8;
     }
 
+    &--add {
+    }
+
+    &--uppercase {
+        text-transform: uppercase;
+    }
+
     &--primary {
         background: #f2f9fe;
         /* 6 dp */
