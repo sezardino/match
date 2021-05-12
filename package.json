@@ -1,0 +1,44 @@
+{
+  "name": "webpack-template",
+  "version": "1.0.0",
+  "description": "webpack 5 template",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --config ./config/webpack.dev.js",
+    "start": "webpack serve --config ./config/webpack.dev.js --open",
+    "build": "webpack --config ./config/webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sezardino/webpack-template.git"
+  },
+  "author": "Edward Arechwa <e.arechwa@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sezardino/webpack-template/issues"
+  },
+  "homepage": "https://github.com/sezardino/webpack-template#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-typescript": "^7.13.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "css-minimizer-webpack-plugin": "^2.0.0",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.6.0",
+    "postcss": "^8.2.13",
+    "postcss-loader": "^5.2.0",
+    "postcss-preset-env": "^6.7.0",
+    "sass": "^1.32.12",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  }
+}

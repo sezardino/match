@@ -1,0 +1,23 @@
+.container {
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 100%;
+    max-width: 100%;
+    @include breakpoint-up("sm") {
+        padding: 0 20px;
+        max-width: 540px;
+    }
+    @include breakpoint-up("md") {
+        max-width: 720px;
+    }
+    @include breakpoint-up("lg") {
+        padding: 0;
+        max-width: 900px;
+    }
+    @include breakpoint-up("xxl") {
+        max-width: 1300px;
+    }
+    @include breakpoint-up("fhd") {
+        max-width: 1620px;
+    }
+}
