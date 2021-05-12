@@ -4,7 +4,7 @@
 
     &__row {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
     }
 
@@ -16,18 +16,63 @@
     &__label {
         display: flex;
         flex-direction: column;
+
+        background-color: gray;
+        padding: 5px;
+
+        position: relative;
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        &--invalid {
+
+            &:before {
+                content: "ok";
+
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                right: 10px;
+            }
+        }
+        &--valid {}
     }
 
     &__label-text {
-
+        font-size: 1.4rem;
+        line-height: 1.9rem;
+        font-weight: 400;
+        color: var(--black);
     }
 
     &__input {
+        font-size: 1.6rem;
+        line-height: 1.9rem;
+        font-weight: 400;
+        color: wheat;
+
+        width: 200px;
+
+        background-color: transparent;
+
+        border: none;
+        border-bottom: 1px solid black;
+
+        padding: 5px 0;
+        &:focus {
+            outline: none;
+        }
     }
 
     &__img {
     }
 
     &__footer {
+        margin-top: 50px;
+
+        display: flex;
+        justify-content: flex-end;
     }
 }
