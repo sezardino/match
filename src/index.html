@@ -7,7 +7,160 @@
         <title>Match game</title>
     </head>
     <body>
+        <header class="header">
+            <div class="header__logo">
+                <img
+                    src="./assets/svg/logo.svg"
+                    alt="game logotype"
+                    class="logo"
+                />
+            </div>
+            <div class="header__nav">
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item nav__item--current">
+                            <a href="#" class="nav__link">
+                                <img
+                                    class="nav__link-img"
+                                    src="./assets/svg/about.svg"
+                                    alt=""
+                                />
+                                <span class="nav__link-text">About Game</span>
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link">
+                                <img
+                                    class="nav__link-img"
+                                    src="./assets/svg/best.svg"
+                                    alt=""
+                                />
+                                <span class="nav__link-text">Best Score</span>
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link">
+                                <img
+                                    class="nav__link-img"
+                                    src="./assets/svg/settings.svg"
+                                    alt=""
+                                />
+                                <span class="nav__link-text"
+                                    >Game Settings</span
+                                >
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="header__user">
+                <button class="button button--primary">
+                    Register new player
+                </button>
+            </div>
+        </header>
+
         <main class="container">
+            <section class="game-info">
+                <h2 class="game-info__title">How to play?</h2>
+                <ol class="game-info__list">
+                    <li class="game-info__list-item">
+                        <div class="game-info__item-wrapper">
+                            <p class="game-info__item-text">
+                                Register new player in game
+                            </p>
+                        </div>
+                        <div
+                            style="width: 302px; height: 218px"
+                            class="game-info__img"
+                        ></div>
+                    </li>
+                    <li class="game-info__list-item">
+                        <div class="game-info__item-wrapper">
+                            <p class="game-info__item-text">
+                                Configure your game settings
+                            </p>
+                        </div>
+                        <div
+                            style="width: 116px; height: 73px"
+                            class="game-info__img"
+                        ></div>
+                    </li>
+                    <li class="game-info__list-item">
+                        <div class="game-info__item-wrapper">
+                            <p class="game-info__item-text">
+                                Start you new game! Remember card positions and
+                                match it before times up.
+                            </p>
+                        </div>
+                        <div
+                            style="width: 330px; height: 240px"
+                            class="game-info__img"
+                        ></div>
+                    </li>
+                </ol>
+            </section>
         </main>
+
+        <div class="popup">
+            <div class="popup__inner">
+                <section class="register-user">
+                    <h2 class="register-user__title">Register new Player</h2>
+                    <form class="register-user__form form form--register">
+                        <div class="form__row">
+                            <div class="form__wrapper">
+                                <label class="form__label">
+                                    <span class="form__label-text"
+                                        >First Name</span
+                                    >
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        class="form__input"
+                                    />
+                                </label>
+                                <label class="form__label">
+                                    <span class="form__label-text"
+                                        >Last Name</span
+                                    >
+                                    <input
+                                        type="text"
+                                        name="surname"
+                                        class="form__input"
+                                    />
+                                </label>
+                                <label class="form__label">
+                                    <span class="form__label-text">E-mail</span>
+                                    <input
+                                        type="mail"
+                                        name="email"
+                                        class="form__input"
+                                    />
+                                </label>
+                            </div>
+                            <img
+                                src="./assets/svg/user.svg"
+                                width="160"
+                                height="160"
+                                alt="user image"
+                                class="form__img"
+                            />
+                        </div>
+                        <footer class="form__footer">
+                            <button
+                                class="button button--add button--uppercase"
+                            >
+                                Add user
+                            </button>
+                            <button
+                                class="button button--primary button--uppercase"
+                            >
+                                Cancel
+                            </button>
+                        </footer>
+                    </form>
+                </section>
+            </div>
+        </div>
     </body>
 </html>
