@@ -17,14 +17,14 @@ module.exports = merge(base, {
     devServer: {
         contentBase: './',
         compress: true,
-        // hot: true,
+        hot: true,
         port: 9000
     },
 
     plugins: [
-        new ESLintPlugin({
-            eslintPath: '../.eslintrc.json'
-        })
+        // new ESLintPlugin({
+        //     eslintPath: path.resolve(__dirname, '../.eslintrc.json')
+        // })
     ],
 
     module: {
