@@ -1,12 +1,25 @@
-@import "./tools/_tools";
-@import "./settings/_settings";
-@import "./libs/_libs";
-@import "./elements/_elements";
-@import "./components/_components";
-@import "./sections/_sections";
+@import './tools/_tools';
+@import './settings/_settings';
+@import './libs/_libs';
+@import './elements/_elements';
+@import './components/_components';
+@import './sections/_sections';
 
 body {
-    font-family: "Roboto";
+    font-family: 'Roboto';
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    margin-top: 20px;
+
+    background: rgba(#000, 0.05);
+    border-radius: 5px;
+
+    padding: 28px 36px 100px 36px;
 }
 
 main {

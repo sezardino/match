@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header class="header">
+            <div class="header__logo">
+                <img
+                    src="./assets/svg/logo.svg"
+                    alt="game logotype"
+                    class="logo"
+                />
+            </div>
+            <div class="header__nav">
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item nav__item--current">
+                            <a href="#" class="nav__link">
+                                <img
+                                    class="nav__link-img"
+                                    src="./assets/svg/about.svg"
+                                    alt=""
+                                />
+                                <span class="nav__link-text">About Game</span>
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link">
+                                <img
+                                    class="nav__link-img"
+                                    src="./assets/svg/best.svg"
+                                    alt=""
+                                />
+                                <span class="nav__link-text">Best Score</span>
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link">
+                                <img
+                                    class="nav__link-img"
+                                    src="./assets/svg/settings.svg"
+                                    alt=""
+                                />
+                                <span class="nav__link-text"
+                                    >Game Settings</span
+                                >
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="header__user user">
+                <button class="button button--primary user__button">
+                    Start Game
+                </button>
+                <div class="user__img-wrapper">
+                    <img src="#" alt="#" class="user__avatar" />
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <section class="game">
+                <div class="game__timer timer">
+                    <p class="timer__count">
+                        <span class="timer__minutes">00</span>
+                        :
+                        <span class="timer__seconds">01</span>
+                    </p>
+                </div>
+                <div class="game__inner">
+                    <button class="play-card play-card--open play-card--forest">
+                        <div class="play-card__image-wrapper">
+                            <img
+                                src="./assets/images/cards/dog/001-dog.svg"
+                                alt=""
+                                class="play-card__image"
+                            />
+                        </div>
+                        <input
+                            type="hidden"
+                            name="answer"
+                            class="play-card__answer"
+                            value=""
+                        />
+                    </button>
+                    <button class="play-card play-card--forest">
+                        <div class="play-card__image-wrapper">
+                            <img
+                                src="./assets/images/cards/dog/001-dog.svg"
+                                alt=""
+                                class="play-card__image"
+                            />
+                        </div>
+                        <input
+                            type="hidden"
+                            name="answer"
+                            class="play-card__answer"
+                            value=""
+                        />
+                    </button>
+                    <button class="play-card play-card--mounts">
+                        <div class="play-card__image-wrapper">
+                            <img
+                                src="./assets/images/cards/dog/001-dog.svg"
+                                alt=""
+                                class="play-card__image"
+                            />
+                        </div>
+                        <input
+                            type="hidden"
+                            name="answer"
+                            class="play-card__answer"
+                            value=""
+                        />
+                    </button>
+                    <button class="play-card play-card--shine">
+                        <div class="play-card__image-wrapper">
+                            <img
+                                src="./assets/images/cards/dog/001-dog.svg"
+                                alt=""
+                                class="play-card__image"
+                            />
+                        </div>
+                        <input
+                            type="hidden"
+                            name="answer"
+                            class="play-card__answer"
+                            value=""
+                        />
+                    </button>
+                    <button class="play-card play-card--city">
+                        <div class="play-card__image-wrapper">
+                            <img
+                                src="./assets/images/cards/dog/001-dog.svg"
+                                alt=""
+                                class="play-card__image"
+                            />
+                        </div>
+                        <input
+                            type="hidden"
+                            name="answer"
+                            class="play-card__answer"
+                            value=""
+                        />
+                    </button>
+                    <button class="play-card play-card--canyon">
+                        <div class="play-card__image-wrapper">
+                            <img
+                                src="./assets/images/cards/dog/001-dog.svg"
+                                alt=""
+                                class="play-card__image"
+                            />
+                        </div>
+                        <input
+                            type="hidden"
+                            name="answer"
+                            class="play-card__answer"
+                            value=""
+                        />
+                    </button>
+                    <button
+                        class="
+                            play-card
+                            play-card--open
+                            play-card--valid
+                            play-card--canyon
+                        "
+                    >
+                        <div class="play-card__image-wrapper">
+                            <img
+                                src="./assets/images/cards/dog/001-dog.svg"
+                                alt=""
+                                class="play-card__image"
+                            />
+                        </div>
+                        <input
+                            type="hidden"
+                            name="answer"
+                            class="play-card__answer"
+                            value=""
+                        />
+                    </button>
+                    <button
+                        class="
+                            play-card
+                            play-card--open
+                            play-card--invalid
+                            play-card--canyon
+                        "
+                    >
+                        <div class="play-card__image-wrapper">
+                            <img
+                                src="./assets/images/cards/dog/001-dog.svg"
+                                alt=""
+                                class="play-card__image"
+                            />
+                        </div>
+                        <input
+                            type="hidden"
+                            name="answer"
+                            class="play-card__answer"
+                            value=""
+                        />
+                    </button>
+                </div>
+            </section>
+        </main>
+        <div class="copy">
+            Icons made by
+            <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+            <a href="https://www.flaticon.com/" title="Flaticon"
+                >www.flaticon.com</a
+            >
+        </div>
+    </body>
+</html>

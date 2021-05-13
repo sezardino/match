@@ -1,0 +1,67 @@
+.play-card {
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    width: 100%;
+    max-width: 170px;
+    min-height: 170px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(gray, 0.4);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    border-radius: 10px;
+
+    &:hover,
+    &:focus,
+    :active {
+        opacity: 0.7;
+    }
+
+    &__image-wrapper {
+        max-width: 100px;
+
+        display: none;
+    }
+
+    &__image {
+    }
+
+    &--canyon {
+        background-image: url('../assets/images/placeholders/canyon.jpg');
+    }
+    &--city {
+        background-image: url('../assets/images/placeholders/city.jpg');
+    }
+    &--forest {
+        background-image: url('../assets/images/placeholders/forest.jpg');
+    }
+    &--mounts {
+        background-image: url('../assets/images/placeholders/mounts.jpg');
+    }
+    &--shine {
+        background-image: url('../assets/images/placeholders/shine.jpg');
+    }
+    &--open {
+        background-image: none;
+        &:hover {
+            opacity: initial;
+        }
+        .play-card__image-wrapper {
+            display: initial;
+        }
+        &.play-card--valid {
+          background-color: rgba(green, 0.5);
+        }
+        &.play-card--invalid {
+          background-color: rgba(red, 0.5);
+        }
+
+    }
+}
