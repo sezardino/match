@@ -1,15 +1,14 @@
 interface IRouter {
     addRoute: (slug: string, callback: () => void) => void;
     removeRoute: (route: string) => void;
+    refresh: () => void;
+    createLink: (link: HTMLAnchorElement) => void;
 }
 
 class Router implements IRouter {
-    private base: string;
     routes: Map<string, () => void>;
 
     constructor() {
-        this.base = '/';
-        this.dir = document.querySelector('#content');
         this.routes = new Map();
 
         this.init();
