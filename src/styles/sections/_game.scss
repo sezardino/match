@@ -1,0 +1,25 @@
+.game {
+    margin-top: 20px;
+
+    background: rgba(#000, 0.05);
+    border-radius: 5px;
+
+    padding: 28px 36px 100px 36px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__timer {
+    }
+
+    &__inner {
+        margin-top: 25px;
+        padding: 15px;
+
+        display: grid;
+        grid-template-columns: repeat(4, 170px);
+        row-gap: 10px;
+        column-gap: 15px;
+    }
+}

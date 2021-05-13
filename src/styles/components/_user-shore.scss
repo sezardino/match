@@ -1,0 +1,27 @@
+.shore {
+    margin-top: 20px;
+
+    background: rgba(#000, 0.05);
+    border-radius: 5px;
+
+    padding: 28px 36px 100px 36px;
+
+    &__title {
+        font-size: 2rem;
+        line-height: 2.1rem;
+        font-weight: 500;
+    }
+
+    &__list {
+        margin-top: 20px;
+    }
+
+    &__item {
+        border-bottom: 1px solid rgba(#000, 0.2);
+        padding-bottom: 5px;
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
+}

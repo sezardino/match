@@ -1,0 +1,42 @@
+.nav {
+    display: flex;
+    &__list {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__item {
+        display: flex;
+        background-color: var(--blue2);
+        opacity: 0.3;
+        &--current {
+          background: transparent;
+            opacity: 1;
+        }
+    }
+
+    &__link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin: auto 0;
+        padding: 0 15px;
+    }
+
+    &__link-text {
+        font-weight: 400;
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+        letter-spacing: 0.04rem;
+
+        color: var(--white);
+    }
+
+    &__link-img {
+        width: 20px;
+        height: 20px;
+
+        margin-bottom: 10px;
+    }
+}
