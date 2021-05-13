@@ -1,7 +1,7 @@
-const path = require('path')
-const { merge } = require('webpack-merge')
-const base = require('./webpack.base.js')
-const ESLintPlugin = require('eslint-webpack-plugin')
+const path = require('path');
+const { merge } = require('webpack-merge');
+const base = require('./webpack.base.js');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = merge(base, {
     mode: 'development',
@@ -17,6 +17,7 @@ module.exports = merge(base, {
     devServer: {
         contentBase: './',
         compress: true,
+        historyApiFallback: true,
         hot: true,
         port: 9000
     },
@@ -47,4 +48,4 @@ module.exports = merge(base, {
             }
         ]
     }
-})
+});
