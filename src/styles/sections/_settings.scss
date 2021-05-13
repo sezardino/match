@@ -1,0 +1,44 @@
+.settings {
+    margin-top: 20px;
+
+    background: rgba(#000, 0.05);
+    border-radius: 5px;
+
+    padding: 28px 36px 100px 36px;
+
+    &__title {
+        font-size: 1.9rem;
+        line-height: 2.1rem;
+        font-weight: 500;
+
+        margin-bottom: 15px;
+    }
+
+    &__list {
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
+    }
+
+    &__select {
+        font-size: 1.6rem;
+        line-height: 1.9rem;
+        font-weight: 400;
+
+        width: 150px;
+
+        border: none;
+
+        padding: 10px;
+
+        cursor: pointer;
+
+        &:focus,
+        &:active {
+            outline: none;
+        }
+    }
+}
