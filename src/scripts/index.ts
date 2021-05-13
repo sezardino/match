@@ -1,9 +1,3 @@
-import Router from './router';
+import SiteController from './controllers/site';
 
-const router = new Router();
-
-router.addRoute('/about', () => console.log(1))
-
-document.querySelectorAll('a').forEach((a) => {
-    router.createLink(a);
-});
+new SiteController('body');

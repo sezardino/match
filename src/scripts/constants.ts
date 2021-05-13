@@ -4,3 +4,5 @@ const RENDER_POSITION = {
     BEFORE_BEGIN: 'beforebegin',
     AFTER_BEGIN: 'afterbegin'
 };
+
+export { RENDER_POSITION };

@@ -44,4 +44,4 @@ class Router implements IRouter {
     }
 }
 
-export default Router;
+export default new Router();
