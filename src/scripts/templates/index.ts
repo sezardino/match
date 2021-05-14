@@ -3,6 +3,10 @@ import copy from './copy';
 import header from './header';
 import main from './main';
 import nav from './nav';
+import popup from './popup';
+import register from './register';
+import registerButton from './registerButton';
+import results from './results';
 import score from './score';
 import settings from './settings';
 
@@ -13,7 +17,11 @@ const Templates = {
     nav,
     about,
     score,
-    settings
+    settings,
+    popup,
+    register,
+    results,
+    registerButton
 };
 
 export default Templates;

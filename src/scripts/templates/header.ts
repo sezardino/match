@@ -12,9 +12,6 @@ const header = () => `
     <div class="header__nav">
     </div>
     <div class="header__user">
-        <button class="button button--primary">
-            Register new player
-        </button>
     </div>
 </header>`;
 
