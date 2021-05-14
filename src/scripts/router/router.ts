@@ -1,17 +1,13 @@
-interface IRouter {
-    addRoute: (slug: string, callback: () => void) => void;
-    removeRoute: (route: string) => void;
-    refresh: () => void;
-    createLink: (link: HTMLAnchorElement) => void;
-}
-
-class Router implements IRouter {
+class Router {
     routes: Map<string, () => void>;
     links: Map<string, HTMLAnchorElement>;
+    activeLinkClass: string;
 
     constructor() {
         this.routes = new Map();
         this.links = new Map();
+
+        this.activeLinkClass = 'nav__link--current';
 
         this.init();
     }
@@ -26,7 +22,7 @@ class Router implements IRouter {
 
     private deleteActiveClassOnLinks() {
         this.links.forEach((link) => {
-            link.classList.remove('nav__link--current');
+            link.classList.remove(this.activeLinkClass);
         });
     }
 
@@ -43,7 +39,7 @@ class Router implements IRouter {
                 window.history.pushState({ slug }, '', path);
                 renderFunc();
                 this.deleteActiveClassOnLinks();
-                link.classList.add('nav__link--current');
+                link.classList.add(this.activeLinkClass);
             }
         });
     }
