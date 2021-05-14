@@ -1,7 +1,10 @@
+import Component from './components/component';
+import Copy from './components/copy';
+import Header from './components/header';
+import Main from './components/main';
 import { RENDER_POSITION } from './constants';
 import Page from './pages/page';
 import router from './router';
-import Templates from './templates';
 import utils from './utils/render';
 
 type PageControllerProps = {
@@ -10,49 +13,32 @@ type PageControllerProps = {
 };
 
 class PageController {
-    root: Element;
-    header: Element;
-    nav: Element;
+    root: Component;
+    header: Component;
     props: PageControllerProps;
     screens: Array<any>;
+    user: { name: string } | null;
 
     constructor(props: PageControllerProps) {
         this.props = props;
         this.screens = props.screens;
+        this.user = null;
 
         this.init();
     }
 
     private render(root: string) {
-        this.root = utils.getElement(Templates.main());
-        utils.renderElement(
-            root,
-            RENDER_POSITION.AFTER_BEGIN as InsertPosition,
-            this.root
-        );
-        this.header = utils.getElement(Templates.header());
-        utils.renderElement(
-            this.root,
-            RENDER_POSITION.BEFORE_BEGIN as InsertPosition,
-            this.header
-        );
-        this.nav = utils.getElement(Templates.nav());
-        utils.renderElement(
-            '.header__nav',
-            RENDER_POSITION.BEFORE_END as InsertPosition,
-            this.nav
-        );
-        utils.renderElement(
-            this.root,
-            RENDER_POSITION.AFTER_END as InsertPosition,
-            utils.getElement(Templates.copy())
-        );
+        this.root = new Main();
+        this.header = new Header({ user: this.user });
+        utils.renderAB(document.querySelector(root), this.root);
+        utils.renderBB(this.root.element, this.header);
+        utils.renderAE(this.root.element, new Copy());
     }
 
     private renderScreen(screen: Page) {
-        this.root.innerHTML = '';
+        this.root.element.innerHTML = '';
         utils.renderElement(
-            this.root,
+            this.root.element,
             RENDER_POSITION.BEFORE_END as InsertPosition,
             screen.getElement()
         );
@@ -65,9 +51,9 @@ class PageController {
     }
 
     private addListeners() {
-        this.nav.querySelectorAll('a').forEach((link) => {
-            router.createLink(link);
-        });
+        // this.header.registerBtnHandler((evt) => {
+        //     console.log(evt);
+        // });
     }
 
     private init() {
