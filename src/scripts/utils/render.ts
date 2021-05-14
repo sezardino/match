@@ -1,29 +1,44 @@
-interface IRenderUtils {
-    find: (el: string) => IRenderUtils;
-    addClass: (className: string) => IRenderUtils;
+interface IUtilsFunctions {
+    renderTemplate: (
+        container: Element,
+        position: InsertPosition,
+        template: string
+    ) => void;
+
+    getElement: (template: string) => Element;
 }
-
-class RenderUtils implements IRenderUtils {
-    private element: HTMLElement;
-    constructor() {
-        this.element = null;
+class UtilFunctions implements IUtilsFunctions {
+    getElement(template: string) {
+        const div = document.createElement('div');
+        div.innerHTML = template;
+        return div.children[0];
     }
 
-    find(el: string) {
-        this.element = document.querySelector(el);
-        return this;
-    }
-
-    addClass(className: string) {
-        if (this.element) {
-            this.element.classList.add(className);
-            return this;
+    renderTemplate(
+        container: Element | string,
+        position: InsertPosition,
+        template: string
+    ) {
+        if (typeof container === 'string') {
+            const cont = document.querySelector(container);
+            cont.insertAdjacentHTML(position, template);
+        } else {
+            container.insertAdjacentHTML(position, template);
         }
     }
 
-    render(place: InsertPosition, component: HTMLElement) {
-        this.element.insertAdjacentElement(place, component);
+    renderElement(
+        container: Element | string,
+        position: InsertPosition,
+        element: Element
+    ) {
+        if (typeof container === 'string') {
+            const cont = document.querySelector(container);
+            cont.insertAdjacentElement(position, element);
+        } else {
+            container.insertAdjacentElement(position, element);
+        }
     }
 }
 
-export default new RenderUtils();
+export default new UtilFunctions();
