@@ -1,13 +1,6 @@
-interface IUtilsFunctions {
-    renderTemplate: (
-        container: Element,
-        position: InsertPosition,
-        template: string
-    ) => void;
-
-    getElement: (template: string) => Element;
-}
-class UtilFunctions implements IUtilsFunctions {
+import Component from '../components/component';
+import { RENDER_POSITION } from '../constants';
+class UtilFunctions {
     getElement(template: string) {
         const div = document.createElement('div');
         div.innerHTML = template;
@@ -38,6 +31,38 @@ class UtilFunctions implements IUtilsFunctions {
         } else {
             container.insertAdjacentElement(position, element);
         }
+    }
+
+    renderBE(container: Element, component: Component) {
+        this.renderElement(
+            container,
+            RENDER_POSITION.BEFORE_END as InsertPosition,
+            component.element
+        );
+    }
+
+    renderBB(container: Element, component: Component) {
+        this.renderElement(
+            container,
+            RENDER_POSITION.BEFORE_BEGIN as InsertPosition,
+            component.element
+        );
+    }
+
+    renderAB(container: Element, component: Component) {
+        this.renderElement(
+            container,
+            RENDER_POSITION.AFTER_BEGIN as InsertPosition,
+            component.element
+        );
+    }
+
+    renderAE(container: Element, component: Component) {
+        this.renderElement(
+            container,
+            RENDER_POSITION.AFTER_END as InsertPosition,
+            component.element
+        );
     }
 }
 
