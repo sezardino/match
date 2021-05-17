@@ -18,11 +18,6 @@ const headerTemplate = () => `
     <div class="header__user"></div>
 </header>`;
 
-const buttonProps = {
-    text: 'Register new player',
-    extraClass: 'button--primary'
-};
-
 type HeaderProps = {
     user: { name: string } | null;
 };
@@ -43,30 +38,14 @@ class Header extends Component {
         this.onLoad();
     }
 
-    signInHandler(handler: () => void) {
-        this.signIn.buttonListener(handler);
-    }
-
-    renderNav() {
-        this.nav = new Nav();
-        const navRoot = this.element.querySelector(this.navSelector);
-        render.renderAB(navRoot, this.nav);
-    }
-
-    renderSignIn(root: Element) {
-        this.signIn = new Button(buttonProps);
-        render.renderAB(root, this.signIn);
-    }
-
-    onLoad() {
-        super.onLoad();
-        this.renderNav()
+    controlUserPlaceHolder(content: any): void {
         const userRoot = this.element.querySelector(this.userSelector);
-        if (this.user) {
-            console.log('have user');
-        } else {
-            this.renderSignIn(userRoot);
-        }
+        render.renderAB(userRoot, content);
+    }
+
+    controlNavPlaceHolder(content: any): void {
+        const userRoot = this.element.querySelector(this.navSelector);
+        render.renderAB(userRoot, content);
     }
 }
 
