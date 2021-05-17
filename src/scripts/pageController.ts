@@ -65,8 +65,10 @@ class PageController {
         const form = new RegisterForm();
 
         form.submitHandler((data) => {
-            api.setUserData(data);
+            this.user = data;
+            this.checkUser();
             this.popup.close();
+            api.setUserData(data);
         });
 
         form.cancelHandler(() => {
@@ -76,7 +78,7 @@ class PageController {
         return form;
     }
 
-    private headerController(): void {
+    private checkUser() {
         if (this.user?.name) {
             this.userView = new UserView();
             this.userView.buttonHandler(() => {
@@ -93,6 +95,10 @@ class PageController {
             );
             this.header.controlUserPlaceHolder(this.signIn);
         }
+    }
+
+    private headerController(): void {
+        this.checkUser();
         this.nav = new Nav({ currentLink: this.currentScreen });
         this.nav.linksListener((pathname) => {
             if (pathname !== this.currentScreen) {

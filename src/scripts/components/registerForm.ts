@@ -77,6 +77,7 @@ class RegisterForm extends Component {
         this.cancelButtonSelector = '.form__cancel';
 
         this.onLoad();
+        this.count = 1;
     }
 
     submitHandler(handler: (data: {}) => void): void {
@@ -92,6 +93,11 @@ class RegisterForm extends Component {
             evt.preventDefault();
             handler();
         });
+    }
+
+    remove() {
+        this.element.parentElement.innerHTML = '';
+        this.element = null;
     }
 
     onLoad() {
