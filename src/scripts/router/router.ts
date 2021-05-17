@@ -1,58 +1,52 @@
+import Page from '../pages/page';
+import render from '../utils/render';
+
 class Router {
-    routes: Map<string, () => void>;
-    links: Map<string, HTMLAnchorElement>;
+    routes: Map<string, Page>;
+    root: Element;
     activeLinkClass: string;
 
-    constructor() {
+    constructor(root: Element) {
         this.routes = new Map();
-        this.links = new Map();
-
-        this.activeLinkClass = 'nav__link--current';
+        this.root = root;
 
         this.init();
     }
 
-    addRoute(slug: string, callback: () => void) {
-        this.routes.set(slug, callback);
+    addRoute(slug: string, screen: Page) {
+        this.routes.set(slug, screen);
     }
 
     removeRoute(route: string) {
         this.routes.delete(route);
     }
 
-    private deleteActiveClassOnLinks() {
-        this.links.forEach((link) => {
-            link.classList.remove(this.activeLinkClass);
-        });
+    404(): void {
+        this.root.innerHTML = '<h2>Cant find page</h2>';
     }
 
-    createLink(link: HTMLAnchorElement) {
-        const path = link.pathname;
-        const slug = path.length > 1 ? path.slice(1) : path;
-
-        this.links.set(slug, link);
-
-        link.addEventListener('click', (evt) => {
-            evt.preventDefault();
-            if (this.routes.has(slug)) {
-                const renderFunc = this.routes.get(slug);
-                window.history.pushState({ slug }, '', path);
-                renderFunc();
-                this.deleteActiveClassOnLinks();
-                link.classList.add(this.activeLinkClass);
-            }
-        });
+    changeRoute(props: { current: string; prev: string }): void {
+        const { current, prev } = props;
+        const prevPage = this.routes.get(prev);
+        const currentPage = this.routes.get(current);
+        history.pushState({ slug: current }, '', current);
+        prevPage.removePage();
+        currentPage.getElement();
+        render.renderAB(this.root, currentPage);
     }
 
     refresh() {
         this.routes.clear();
     }
 
-    onAppLoad() {
-        const { pathname } = location;
-        const slug = pathname.length > 1 ? pathname.slice(1) : pathname;
-        const renderFunction = this.routes.get(slug);
-        renderFunction();
+    onAppLoad(slug: string) {
+        const currentScreen = this.routes.get(slug);
+        if (currentScreen) {
+            currentScreen.getElement();
+            render.renderAB(this.root, currentScreen);
+        } else {
+            this[404]();
+        }
     }
 
     private init() {
@@ -63,4 +57,4 @@ class Router {
     }
 }
 
-export default new Router();
+export default Router;

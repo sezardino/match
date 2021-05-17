@@ -8,9 +8,8 @@ import Nav from './components/nav';
 import Popup from './components/popup';
 import RegisterForm from './components/registerForm';
 import UserView from './components/user';
-import { RENDER_POSITION } from './constants';
 import Page from './pages/page';
-import router from './router';
+import Router from './router';
 import utils from './utils/render';
 
 type PageControllerProps = {
@@ -29,12 +28,15 @@ class PageController {
     popup: Popup;
     signIn: Button;
     nav: Nav;
+    router: Router;
+    currentScreen: string;
     user: { name: string } | null;
 
     constructor(props: PageControllerProps) {
         this.props = props;
         this.screens = props.screens;
         this.user = localStorage.getItem(LS_NAME);
+        this.currentScreen = '/';
 
         this.init();
     }
@@ -47,21 +49,6 @@ class PageController {
         utils.renderBB(this.root.element, this.header);
         utils.renderAE(this.root.element, new Copy());
         utils.renderAE(this.root.element, this.popup);
-    }
-
-    private renderScreen(screen: Page) {
-        this.root.element.innerHTML = '';
-        utils.renderElement(
-            this.root.element,
-            RENDER_POSITION.BEFORE_END as InsertPosition,
-            screen.getElement()
-        );
-    }
-
-    private registerScreens() {
-        this.screens.forEach((screen) => {
-            router.addRoute(screen.slug, () => this.renderScreen(screen));
-        });
     }
 
     registerForm(): RegisterForm {
@@ -97,24 +84,36 @@ class PageController {
             );
             this.header.controlUserPlaceHolder(this.signIn);
         }
-
-        this.nav = new Nav();
+        this.nav = new Nav({ currentLink: this.currentScreen });
+        this.nav.linksListener((pathname) => {
+            if (pathname !== this.currentScreen) {
+                const props = {
+                    prev: this.currentScreen,
+                    current: pathname
+                };
+                this.currentScreen = pathname;
+                this.router.changeRoute(props);
+            }
+        });
         this.header.controlNavPlaceHolder(this.nav);
     }
 
-    private addListeners() {
-        // this.header.signInHandler(() => {
-        //     this.popup.open(this.registerForm());
-        // });
+    routerInit(): void {
+        const { pathname } = location;
+        this.router = new Router(this.root.element);
+        this.currentScreen =
+            this.currentScreen !== pathname ? pathname.slice(1) : pathname;
+        this.screens.forEach((screen) => {
+            this.router.addRoute(screen.slug, screen);
+        });
+        this.router.onAppLoad(this.currentScreen);
     }
 
     private init() {
         this.render(this.props.root);
-        this.headerController();
+        this.routerInit();
 
-        this.registerScreens();
-        this.addListeners();
-        router.onAppLoad();
+        this.headerController();
     }
 }
 

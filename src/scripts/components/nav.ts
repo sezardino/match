@@ -1,13 +1,12 @@
 import about from '../../assets/svg/about.svg';
 import score from '../../assets/svg/best.svg';
 import settings from '../../assets/svg/settings.svg';
-import router from '../router';
 import Component from './component';
 
 const navTemplate = () => `<nav class="nav">
 <ul class="nav__list">
     <li class="nav__item">
-        <a href="/" class="nav__link nav__link--current">
+        <a href="/" class="nav__link">
             <img
                 class="nav__link-img"
                 src="${about}"
@@ -39,22 +38,54 @@ const navTemplate = () => `<nav class="nav">
 </nav>`;
 
 class Nav extends Component {
-    constructor() {
+    activeLinkClass: string;
+    currentLink: string;
+    links: NodeListOf<HTMLAnchorElement>;
+    constructor(props: { currentLink: string }) {
         super();
         this.template = navTemplate();
+
+        this.activeLinkClass = 'nav__link--current';
+        this.currentLink =
+            props.currentLink === '/'
+                ? props.currentLink
+                : '/' + props.currentLink;
 
         this.onLoad();
     }
 
-    registerLinks() {
-        this.element.querySelectorAll('a').forEach((link) => {
-            router.createLink(link);
+    changeCurrentLink(link: string) {
+        this.links.forEach((item: HTMLAnchorElement) => {
+            if (item.pathname === link) {
+                item.classList.add(this.activeLinkClass);
+                this.currentLink = link;
+            } else {
+                item.classList.remove(this.activeLinkClass);
+            }
+        });
+    }
+
+    linksListener(handler: (pathname: string) => void): void {
+        this.links.forEach((link) => {
+            link.addEventListener('click', (evt) => {
+                evt.preventDefault();
+                const target = evt.target as HTMLAnchorElement;
+                const link = target.closest('a');
+                this.changeCurrentLink(link.pathname);
+                const pathname =
+                    link.pathname.length > 1
+                        ? link.pathname.slice(1)
+                        : link.pathname;
+                handler(pathname);
+            });
         });
     }
 
     onLoad() {
         super.onLoad();
-        this.registerLinks();
+
+        this.links = this.element.querySelectorAll('a');
+        this.changeCurrentLink(this.currentLink);
     }
 }
 

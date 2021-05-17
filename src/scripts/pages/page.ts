@@ -12,7 +12,12 @@ abstract class Page {
     }
 
     getElement() {
-        return render.getElement(this.template);
+        this.element = render.getElement(this.template);
+    }
+
+    removePage() {
+        this.element.parentElement.innerHTML = '';
+        this.element = null;
     }
 }
 
