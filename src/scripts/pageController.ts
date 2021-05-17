@@ -110,8 +110,7 @@ class PageController {
     routerInit(): void {
         const { pathname } = location;
         this.router = new Router(this.root.element);
-        this.currentScreen =
-            this.currentScreen !== pathname ? pathname.slice(1) : pathname;
+        this.currentScreen = pathname === '/' ? SLUGS.ABOUT : pathname.slice(1);
         const screens = Object.entries(this.screens);
         screens.forEach(([key, screen]) => {
             this.router.addRoute(screen.slug, screen);
