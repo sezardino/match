@@ -1,5 +1,6 @@
 import Component from '../components/component';
 import { RENDER_POSITION } from '../constants';
+import Page from '../pages/page';
 class UtilFunctions {
     getElement(template: string) {
         const div = document.createElement('div');
@@ -33,7 +34,7 @@ class UtilFunctions {
         }
     }
 
-    renderBE(container: Element, component: Component) {
+    renderBE(container: Element, component: Component | Page) {
         this.renderElement(
             container,
             RENDER_POSITION.BEFORE_END as InsertPosition,
@@ -41,7 +42,7 @@ class UtilFunctions {
         );
     }
 
-    renderBB(container: Element, component: Component) {
+    renderBB(container: Element, component: Component | Page) {
         this.renderElement(
             container,
             RENDER_POSITION.BEFORE_BEGIN as InsertPosition,
@@ -49,7 +50,7 @@ class UtilFunctions {
         );
     }
 
-    renderAB(container: Element, component: Component) {
+    renderAB(container: Element, component: Component | Page) {
         this.renderElement(
             container,
             RENDER_POSITION.AFTER_BEGIN as InsertPosition,
@@ -57,7 +58,7 @@ class UtilFunctions {
         );
     }
 
-    renderAE(container: Element, component: Component) {
+    renderAE(container: Element, component: Component | Page) {
         this.renderElement(
             container,
             RENDER_POSITION.AFTER_END as InsertPosition,
