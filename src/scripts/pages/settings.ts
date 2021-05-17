@@ -1,4 +1,5 @@
 import { PageProps } from '../interfaces';
+import utils from '../utils/utils';
 import Page from './page';
 
 const settingsTemplate = () => `
@@ -50,21 +51,38 @@ const settingsTemplate = () => `
 
 class Settings extends Page {
     form: HTMLFormElement;
+    handler: (formData: {}) => void | null;
 
     constructor(slug: string) {
         super(slug);
         this.template = settingsTemplate();
+
+        this.formHandler = this.formHandler.bind(this);
     }
 
     getElement() {
         super.getElement();
-        this.form = document.querySelector('form');
+        this.form = this.element.querySelector('form');
+        this.addListeners();
     }
 
-    formHandler(handler: () => void) {
-        this.form.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        });
+    removePage() {
+        super.removePage();
+        this.removeListeners();
+    }
+
+    addListeners() {
+        this.form.addEventListener('submit', this.formHandler);
+    }
+
+    removeListeners() {
+        this.form.removeEventListener('submit', this.formHandler);
+    }
+
+    formHandler(evt: Event) {
+        evt.preventDefault();
+        const formData = utils.getFormData(this.form);
+        this.handler(formData);
     }
 }
 

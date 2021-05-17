@@ -1,6 +1,7 @@
 import Component from './component';
 
 import userLogo from '../../assets/svg/user.svg';
+import utils from '../utils/utils';
 
 const registerFormTemplate = () => `
 <section class="register-user">
@@ -78,19 +79,10 @@ class RegisterForm extends Component {
         this.onLoad();
     }
 
-    getData(form: HTMLFormElement): {} {
-        const inputs = form.querySelectorAll('input');
-        const formData = {};
-        inputs.forEach((input: HTMLInputElement) => {
-            formData[input.name] = input.value;
-        });
-        return formData;
-    }
-
     submitHandler(handler: (data: {}) => void): void {
         this.form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            const formData = this.getData(evt.target as HTMLFormElement);
+            const formData = utils.getFormData(evt.target as HTMLFormElement);
             handler(formData);
         });
     }

@@ -15,7 +15,7 @@ import Page from './pages/page';
 import Score from './pages/score';
 import Settings from './pages/settings';
 import Router from './router';
-import utils from './utils/render';
+import utils from './utils/utils';
 
 type PageControllerProps = {
     root: string;
@@ -28,7 +28,7 @@ class PageController {
     header: Header;
     userView: UserView;
     props: PageControllerProps;
-    screens: Array<any>;
+    screens: { about: About; settings: Settings; score: Score; game: Game };
     popup: Popup;
     signIn: Button;
     nav: Nav;
@@ -44,7 +44,7 @@ class PageController {
             score: new Score('score'),
             game: new Game('game')
         };
-        this.user = localStorage.getItem(LS_NAME);
+        this.user = api.getUserData();
         this.currentScreen = SLUGS.ABOUT;
 
         this.init();
@@ -64,8 +64,7 @@ class PageController {
         const form = new RegisterForm();
 
         form.submitHandler((data) => {
-            const stringifyData = JSON.stringify(data);
-            localStorage.setItem(LS_NAME, stringifyData);
+            api.setUserData(data);
             this.popup.close();
         });
 
@@ -77,7 +76,7 @@ class PageController {
     }
 
     headerController(): void {
-        if (this.user) {
+        if (this.user.name) {
             this.userView = new UserView();
             this.userView.buttonHandler(() => {
                 console.log('start');
@@ -107,6 +106,14 @@ class PageController {
         this.header.controlNavPlaceHolder(this.nav);
     }
 
+    settingsHandler() {
+        const component = this.screens.settings;
+        component.handler = (data) => {
+            console.log(data);
+            api.setSettingsData(data);
+        };
+    }
+
     routerInit(): void {
         const { pathname } = location;
         this.router = new Router(this.root.element);
@@ -114,11 +121,15 @@ class PageController {
         const screens = Object.entries(this.screens);
         screens.forEach(([key, screen]) => {
             this.router.addRoute(screen.slug, screen);
+            if (this[`${key}Handler`]) {
+                this[`${key}Handler`]();
+            }
         });
         this.router.onAppLoad(this.currentScreen);
     }
 
     private init() {
+        console.log(this.user);
         this.render(this.props.root);
         this.routerInit();
 

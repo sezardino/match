@@ -1,4 +1,4 @@
-import render from '../utils/render';
+import render from '../utils/utils';
 import Component from './component';
 
 import logo from '../../assets/svg/logo.svg';

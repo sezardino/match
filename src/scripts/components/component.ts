@@ -1,4 +1,4 @@
-import render from '../utils/render';
+import render from '../utils/utils';
 
 abstract class Component {
     element: Element | null;

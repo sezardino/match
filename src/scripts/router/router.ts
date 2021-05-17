@@ -1,5 +1,5 @@
 import Page from '../pages/page';
-import render from '../utils/render';
+import render from '../utils/utils';
 
 class Router {
     routes: Map<string, Page>;
