@@ -29,8 +29,13 @@ class Router {
         const { current, prev } = props;
         const prevPage = this.routes.get(prev);
         const currentPage = this.routes.get(current);
-        history.pushState({ slug: current }, '', current);
-        prevPage.removePage();
+        const currentUrl = current === 'home' ? '/' : current;
+        history.pushState({ slug: currentUrl }, '', currentUrl);
+        if (prevPage) {
+            prevPage.removePage();
+        } else {
+            this.root.innerHTML = '';
+        }
         currentPage.getElement();
         render.renderAB(this.root, currentPage);
     }

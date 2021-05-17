@@ -5,4 +5,11 @@ const RENDER_POSITION = {
     AFTER_BEGIN: 'afterbegin'
 };
 
-export { RENDER_POSITION };
+const SLUGS = {
+    ABOUT: 'home',
+    SCORE: 'score',
+    SETTINGS: 'settings',
+    GAME: 'game'
+};
+
+export { RENDER_POSITION, SLUGS };

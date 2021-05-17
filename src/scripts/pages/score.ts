@@ -72,8 +72,8 @@ const scoreTemplate = () => `
 </section>`;
 
 class Score extends Page {
-    constructor(props: PageProps) {
-        super(props);
+    constructor(slug: string) {
+        super(slug);
         this.template = scoreTemplate();
     }
 }

@@ -5,8 +5,8 @@ abstract class Page {
     slug: string;
     element: Element | null;
     template: string | null;
-    constructor(props: PageProps) {
-        this.slug = props.slug;
+    constructor(slug: string) {
+        this.slug = slug;
         this.element = null;
         this.template = null;
     }
@@ -18,6 +18,10 @@ abstract class Page {
     removePage() {
         this.element.parentElement.innerHTML = '';
         this.element = null;
+    }
+
+    pageHandlers(handlers) {
+        console.log(1);
     }
 }
 

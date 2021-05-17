@@ -49,9 +49,22 @@ const settingsTemplate = () => `
 </section>`;
 
 class Settings extends Page {
-    constructor(props: PageProps) {
-        super(props);
+    form: HTMLFormElement;
+
+    constructor(slug: string) {
+        super(slug);
         this.template = settingsTemplate();
+    }
+
+    getElement() {
+        super.getElement();
+        this.form = document.querySelector('form');
+    }
+
+    formHandler(handler: () => void) {
+        this.form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        });
     }
 }
 

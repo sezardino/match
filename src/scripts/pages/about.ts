@@ -43,8 +43,8 @@ const aboutTemplate = () => `
 </section>`;
 
 class About extends Page {
-    constructor(props: PageProps) {
-        super(props);
+    constructor(slug: string) {
+        super(slug);
         this.template = aboutTemplate();
     }
 }

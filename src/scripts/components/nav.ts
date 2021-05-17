@@ -6,7 +6,7 @@ import Component from './component';
 const navTemplate = () => `<nav class="nav">
 <ul class="nav__list">
     <li class="nav__item">
-        <a href="/" class="nav__link">
+        <a href="home" class="nav__link">
             <img
                 class="nav__link-img"
                 src="${about}"
@@ -15,7 +15,7 @@ const navTemplate = () => `<nav class="nav">
         </a>
     </li>
     <li class="nav__item">
-        <a href="/score" class="nav__link">
+        <a href="score" class="nav__link">
             <img
                 class="nav__link-img"
                 src="${score}"
@@ -24,7 +24,7 @@ const navTemplate = () => `<nav class="nav">
         </a>
     </li>
     <li class="nav__item">
-        <a href="/settings" class="nav__link">
+        <a href="settings" class="nav__link">
             <img
                 class="nav__link-img"
                 src="${settings}"
@@ -46,17 +46,13 @@ class Nav extends Component {
         this.template = navTemplate();
 
         this.activeLinkClass = 'nav__link--current';
-        this.currentLink =
-            props.currentLink === '/'
-                ? props.currentLink
-                : '/' + props.currentLink;
-
+        this.currentLink = props.currentLink;
         this.onLoad();
     }
 
     changeCurrentLink(link: string) {
         this.links.forEach((item: HTMLAnchorElement) => {
-            if (item.pathname === link) {
+            if (item.pathname.includes(link)) {
                 item.classList.add(this.activeLinkClass);
                 this.currentLink = link;
             } else {
@@ -71,12 +67,9 @@ class Nav extends Component {
                 evt.preventDefault();
                 const target = evt.target as HTMLAnchorElement;
                 const link = target.closest('a');
-                this.changeCurrentLink(link.pathname);
-                const pathname =
-                    link.pathname.length > 1
-                        ? link.pathname.slice(1)
-                        : link.pathname;
-                handler(pathname);
+                const slug = link.pathname.slice(1);
+                this.changeCurrentLink(slug);
+                handler(slug);
             });
         });
     }

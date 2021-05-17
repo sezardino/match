@@ -8,13 +8,17 @@ import Nav from './components/nav';
 import Popup from './components/popup';
 import RegisterForm from './components/registerForm';
 import UserView from './components/user';
+import { SLUGS } from './constants';
+import About from './pages/about';
+import Game from './pages/game';
 import Page from './pages/page';
+import Score from './pages/score';
+import Settings from './pages/settings';
 import Router from './router';
 import utils from './utils/render';
 
 type PageControllerProps = {
     root: string;
-    screens: Array<any>;
 };
 
 const LS_NAME = 'math-game-user';
@@ -34,9 +38,14 @@ class PageController {
 
     constructor(props: PageControllerProps) {
         this.props = props;
-        this.screens = props.screens;
+        this.screens = {
+            about: new About('home'),
+            settings: new Settings('settings'),
+            score: new Score('score'),
+            game: new Game('game')
+        };
         this.user = localStorage.getItem(LS_NAME);
-        this.currentScreen = '/';
+        this.currentScreen = SLUGS.ABOUT;
 
         this.init();
     }
@@ -103,7 +112,8 @@ class PageController {
         this.router = new Router(this.root.element);
         this.currentScreen =
             this.currentScreen !== pathname ? pathname.slice(1) : pathname;
-        this.screens.forEach((screen) => {
+        const screens = Object.entries(this.screens);
+        screens.forEach(([key, screen]) => {
             this.router.addRoute(screen.slug, screen);
         });
         this.router.onAppLoad(this.currentScreen);
