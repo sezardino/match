@@ -9,11 +9,11 @@ class API {
     }
 
     getUserData() {
-        return this.getData()?.user || {};
+        return this.getData()?.user || null;
     }
 
     getSettingsData() {
-        return this.getData()?.settings || {};
+        return this.getData()?.settings || null;
     }
 
     setUserData(newData: {}) {

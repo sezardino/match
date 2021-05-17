@@ -8,10 +8,9 @@ import Nav from './components/nav';
 import Popup from './components/popup';
 import RegisterForm from './components/registerForm';
 import UserView from './components/user';
-import { SLUGS } from './constants';
+import { DEFAULT_SETTINGS, SLUGS } from './constants';
 import About from './pages/about';
 import Game from './pages/game';
-import Page from './pages/page';
 import Score from './pages/score';
 import Settings from './pages/settings';
 import Router from './router';
@@ -34,6 +33,7 @@ class PageController {
     nav: Nav;
     router: Router;
     currentScreen: string;
+    userSettings: { cards: string; difficulty: string; placeholders: string };
     user: { name: string } | null;
 
     constructor(props: PageControllerProps) {
@@ -45,6 +45,7 @@ class PageController {
             game: new Game('game')
         };
         this.user = api.getUserData();
+        this.userSettings = api.getSettingsData() || DEFAULT_SETTINGS;
         this.currentScreen = SLUGS.ABOUT;
 
         this.init();
@@ -60,7 +61,7 @@ class PageController {
         utils.renderAE(this.root.element, this.popup);
     }
 
-    registerForm(): RegisterForm {
+    private registerForm(): RegisterForm {
         const form = new RegisterForm();
 
         form.submitHandler((data) => {
@@ -75,8 +76,8 @@ class PageController {
         return form;
     }
 
-    headerController(): void {
-        if (this.user.name) {
+    private headerController(): void {
+        if (this.user?.name) {
             this.userView = new UserView();
             this.userView.buttonHandler(() => {
                 console.log('start');
@@ -106,7 +107,7 @@ class PageController {
         this.header.controlNavPlaceHolder(this.nav);
     }
 
-    settingsHandler() {
+    private settingsHandler() {
         const component = this.screens.settings;
         component.handler = (data) => {
             console.log(data);
@@ -114,7 +115,7 @@ class PageController {
         };
     }
 
-    routerInit(): void {
+    private routerInit(): void {
         const { pathname } = location;
         this.router = new Router(this.root.element);
         this.currentScreen = pathname === '/' ? SLUGS.ABOUT : pathname.slice(1);
@@ -129,7 +130,6 @@ class PageController {
     }
 
     private init() {
-        console.log(this.user);
         this.render(this.props.root);
         this.routerInit();
 

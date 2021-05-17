@@ -12,4 +12,10 @@ const SLUGS = {
     GAME: 'game'
 };
 
-export { RENDER_POSITION, SLUGS };
+const DEFAULT_SETTINGS = {
+    cards: 'bear',
+    difficulty: 'easy',
+    placeholders: 'canyon'
+};
+
+export { RENDER_POSITION, SLUGS, DEFAULT_SETTINGS };

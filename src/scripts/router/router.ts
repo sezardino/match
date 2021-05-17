@@ -17,15 +17,15 @@ class Router {
         this.routes.set(slug, screen);
     }
 
-    removeRoute(route: string) {
+    private removeRoute(route: string) {
         this.routes.delete(route);
     }
 
-    404(): void {
+    private 404(): void {
         this.root.innerHTML = '<h2>Cant find page</h2>';
     }
 
-    changeRoute(props: { current: string; prev: string }): void {
+    private changeRoute(props: { current: string; prev: string }): void {
         const { current, prev } = props;
         const prevPage = this.routes.get(prev);
         const currentPage = this.routes.get(current);
