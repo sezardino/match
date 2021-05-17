@@ -4,7 +4,7 @@ const buttonTemplate = (props: { text: string; extraClass: string }) => {
     const { text, extraClass } = props;
     return `
     <button class="button ${extraClass}">
-      ${text}
+        ${text}
     </button>`;
 };
 

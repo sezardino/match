@@ -74,7 +74,7 @@ class PageController {
         });
 
         form.cancelHandler(() => {
-            console.log('cancel');
+            this.popup.close();
         });
 
         return form;
