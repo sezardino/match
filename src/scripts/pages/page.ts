@@ -1,4 +1,3 @@
-import { PageProps } from '../interfaces';
 import render from '../utils/utils';
 
 abstract class Page {

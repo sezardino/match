@@ -1,4 +1,4 @@
-import render from '../utils/utils';
+import utils from '../utils/utils';
 import Component from './component';
 
 import logo from '../../assets/svg/logo.svg';
@@ -40,12 +40,13 @@ class Header extends Component {
 
     controlUserPlaceHolder(content: any): void {
         const userRoot = this.element.querySelector(this.userSelector);
-        render.renderAB(userRoot, content);
+        // utils.render(userRoot, content);
+        // utils.renderAB(userRoot, content);
     }
 
     controlNavPlaceHolder(content: any): void {
         const userRoot = this.element.querySelector(this.navSelector);
-        render.renderAB(userRoot, content);
+        utils.render(userRoot, content);
     }
 }
 

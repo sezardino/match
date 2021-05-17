@@ -8,6 +8,17 @@ class UtilFunctions {
         return div.children[0];
     }
 
+    createElement(template) {
+        const div = document.createElement('div');
+        div.innerHTML = template;
+        return div.firstElementChild;
+    }
+
+    render(container, component, place = 'afterbegin') {
+        const element = component.getElement();
+        container.insertAdjacentElement(place, element);
+    }
+
     renderTemplate(
         container: Element | string,
         position: InsertPosition,
