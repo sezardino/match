@@ -13,6 +13,7 @@ const registerFormTemplate = () => `
                         >First Name</span
                     >
                     <input
+                        required
                         type="text"
                         name="name"
                         class="form__input"
@@ -23,6 +24,7 @@ const registerFormTemplate = () => `
                         >Last Name</span
                     >
                     <input
+                        required
                         type="text"
                         name="surname"
                         class="form__input"
@@ -31,7 +33,8 @@ const registerFormTemplate = () => `
                 <label class="form__label">
                     <span class="form__label-text">E-mail</span>
                     <input
-                        type="mail"
+                        required
+                        type="email"
                         name="email"
                         class="form__input"
                     />
@@ -75,10 +78,20 @@ class RegisterForm extends Component {
         this.onLoad();
     }
 
-    submitHandler(handler: () => void): void {
+    getData(form: HTMLFormElement): {} {
+        const inputs = form.querySelectorAll('input');
+        const formData = {};
+        inputs.forEach((input: HTMLInputElement) => {
+            formData[input.name] = input.value;
+        });
+        return formData;
+    }
+
+    submitHandler(handler: (data: {}) => void): void {
         this.form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            handler();
+            const formData = this.getData(evt.target as HTMLFormElement);
+            handler(formData);
         });
     }
 
