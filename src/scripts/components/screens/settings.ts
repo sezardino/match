@@ -1,5 +1,5 @@
 import utils from '../../utils/utils';
-import Screen from '../abs/absScreen';
+import Screen from '../abs/screen';
 
 const settingsTemplate = () => `
 <section class="settings">

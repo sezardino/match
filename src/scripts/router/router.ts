@@ -1,13 +1,17 @@
-import Screen from '../components/abs/absScreen';
+import Screen from '../components/abs/screen';
+import { GameScreen } from '../components/_index';
+import { SLUGS } from '../utils/constants';
 import render from '../utils/utils';
 
 class Router {
     routes: Map<string, Screen>;
     root: Element;
+    game: null | GameScreen;
     activeLinkClass: string;
 
     constructor(root: Element) {
         this.routes = new Map();
+        this.game = null;
         this.root = root;
 
         this.init();
@@ -25,15 +29,21 @@ class Router {
         this.root.innerHTML = '<h2>Cant find page</h2>';
     }
 
-    changeRouteToGame(current: string, game) {
-        console.log(game);
+    changeRouteToGame(current: string, game: Screen) {
         const currentPage = this.routes.get(current);
-        currentPage.removeElement();
+        if (currentPage) {
+            currentPage?.removeElement();
+        } else {
+            this.root.innerHTML = '';
+        }
+        history.pushState({ slug: 'game' }, '', 'game');
+        render.render(this.root, game);
     }
 
     changeRoute(props: { current: string; prev: string }): void {
         const { current, prev } = props;
-        const prevPage = this.routes.get(prev);
+        const prevPage =
+            prev === SLUGS.GAME ? this.game : this.routes.get(prev);
         const currentPage = this.routes.get(current);
         const currentUrl = current === 'home' ? '/' : current;
         history.pushState({ slug: currentUrl }, '', currentUrl);
@@ -43,7 +53,7 @@ class Router {
             this.root.innerHTML = '';
         }
         currentPage.getElement();
-        render.renderAB(this.root, currentPage);
+        render.render(this.root, currentPage);
     }
 
     refresh() {
@@ -54,7 +64,7 @@ class Router {
         const currentScreen = this.routes.get(slug);
         if (currentScreen) {
             currentScreen.getElement();
-            render.renderAB(this.root, currentScreen);
+            render.render(this.root, currentScreen);
         } else {
             this[404]();
         }

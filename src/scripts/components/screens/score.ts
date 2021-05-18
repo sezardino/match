@@ -1,4 +1,4 @@
-import Screen from '../abs/absScreen';
+import Screen from '../abs/screen';
 
 const scoreTemplate = () => `
 <section class="shore">

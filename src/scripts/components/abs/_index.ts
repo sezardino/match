@@ -1,4 +1,4 @@
-import Component from './absComponent';
-import Screen from './absScreen';
+import Component from './component';
+import Screen from './screen';
 
 export { Component, Screen };

@@ -1,4 +1,4 @@
-import Screen from '../abs/absScreen';
+import Screen from '../abs/screen';
 
 const aboutTemplate = () => `
 <section class="game-info">

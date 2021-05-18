@@ -1,4 +1,4 @@
-import Component from './abs/absComponent';
+import Component from './abs/component';
 
 import userLogo from '../../assets/svg/user.svg';
 import utils from '../utils/utils';

@@ -1,6 +1,6 @@
-import AboutScreen from './aboutScreen';
-import GameScreen from './gameScreen';
-import ScoreScreen from './scoreScreen';
-import SettingsScreen from './settingsScreen';
+import AboutScreen from './about';
+import GameScreen from './game';
+import ScoreScreen from './score';
+import SettingsScreen from './settings';
 
 export { AboutScreen, ScoreScreen, SettingsScreen, GameScreen };

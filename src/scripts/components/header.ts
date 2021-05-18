@@ -1,5 +1,5 @@
 import utils from '../utils/utils';
-import Component from './abs/absComponent';
+import Component from './abs/component';
 
 import logo from '../../assets/svg/logo.svg';
 import Button from './button';

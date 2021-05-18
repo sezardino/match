@@ -1,4 +1,4 @@
-import Component from './abs/absComponent';
+import Component from './abs/component';
 
 const mainTemplate = () => `<main class="container"></main>`;
 

@@ -1,7 +1,7 @@
-import api from './api/api';
-import { DEFAULT_SETTINGS, SLUGS } from './constants';
-import Router from './router';
-import utils from './utils/utils';
+import api from '../api/api';
+import { DEFAULT_SETTINGS, SLUGS } from '../utils/constants';
+import Router from '../router';
+import utils from '../utils/utils';
 
 import {
     Button,
@@ -18,7 +18,7 @@ import {
     SettingsScreen,
     GameScreen,
     Screen
-} from './components/_index';
+} from '../components/_index';
 
 type PageControllerProps = {
     root: string;
@@ -84,7 +84,12 @@ class PageController {
     }
 
     startGameHandler() {
-        this.router.changeRouteToGame(this.currentScreen);
+        const game = new GameScreen({
+            slug: 'game',
+            settings: this.userSettings
+        });
+        this.router.changeRouteToGame(this.currentScreen, game);
+        this.currentScreen = SLUGS.GAME;
     }
 
     private checkUser() {

@@ -1,7 +1,7 @@
 import about from '../../assets/svg/about.svg';
 import score from '../../assets/svg/best.svg';
 import settings from '../../assets/svg/settings.svg';
-import Component from './abs/absComponent';
+import Component from './abs/component';
 
 const navTemplate = () => `<nav class="nav">
 <ul class="nav__list">

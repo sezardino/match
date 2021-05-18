@@ -1,6 +1,5 @@
-import Component from '../components/abs/absComponent';
-import { RENDER_POSITION } from '../constants';
-import Page from '../pages/page';
+import Component from '../components/abs/component';
+import { RENDER_POSITION } from './constants';
 class UtilFunctions {
     getElement(template: string) {
         const div = document.createElement('div');

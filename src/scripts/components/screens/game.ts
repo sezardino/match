@@ -1,4 +1,10 @@
-import Screen from '../abs/absScreen';
+import Screen from '../abs/screen';
+
+const card = `            // <img
+//     src="./assets/images/cards/dog/001-dog.svg"
+//     alt=""
+//     class="play-card__image"
+// />`;
 
 const gameTemplate = () => `
 <section class="game">
@@ -12,11 +18,7 @@ const gameTemplate = () => `
 <div class="game__inner">
     <button class="play-card play-card--open play-card--forest">
         <div class="play-card__image-wrapper">
-            <img
-                src="./assets/images/cards/dog/001-dog.svg"
-                alt=""
-                class="play-card__image"
-            />
+
         </div>
         <input
             type="hidden"
@@ -27,11 +29,7 @@ const gameTemplate = () => `
     </button>
     <button class="play-card play-card--forest">
         <div class="play-card__image-wrapper">
-            <img
-                src="./assets/images/cards/dog/001-dog.svg"
-                alt=""
-                class="play-card__image"
-            />
+
         </div>
         <input
             type="hidden"
@@ -42,11 +40,7 @@ const gameTemplate = () => `
     </button>
     <button class="play-card play-card--mounts">
         <div class="play-card__image-wrapper">
-            <img
-                src="./assets/images/cards/dog/001-dog.svg"
-                alt=""
-                class="play-card__image"
-            />
+
         </div>
         <input
             type="hidden"
@@ -57,11 +51,7 @@ const gameTemplate = () => `
     </button>
     <button class="play-card play-card--shine">
         <div class="play-card__image-wrapper">
-            <img
-                src="./assets/images/cards/dog/001-dog.svg"
-                alt=""
-                class="play-card__image"
-            />
+
         </div>
         <input
             type="hidden"
@@ -72,11 +62,7 @@ const gameTemplate = () => `
     </button>
     <button class="play-card play-card--city">
         <div class="play-card__image-wrapper">
-            <img
-                src="./assets/images/cards/dog/001-dog.svg"
-                alt=""
-                class="play-card__image"
-            />
+
         </div>
         <input
             type="hidden"
@@ -87,11 +73,7 @@ const gameTemplate = () => `
     </button>
     <button class="play-card play-card--canyon">
         <div class="play-card__image-wrapper">
-            <img
-                src="./assets/images/cards/dog/001-dog.svg"
-                alt=""
-                class="play-card__image"
-            />
+
         </div>
         <input
             type="hidden"
@@ -109,11 +91,7 @@ const gameTemplate = () => `
         "
     >
         <div class="play-card__image-wrapper">
-            <img
-                src="./assets/images/cards/dog/001-dog.svg"
-                alt=""
-                class="play-card__image"
-            />
+
         </div>
         <input
             type="hidden"
@@ -131,11 +109,7 @@ const gameTemplate = () => `
         "
     >
         <div class="play-card__image-wrapper">
-            <img
-                src="./assets/images/cards/dog/001-dog.svg"
-                alt=""
-                class="play-card__image"
-            />
+
         </div>
         <input
             type="hidden"
@@ -149,12 +123,25 @@ const gameTemplate = () => `
 `;
 
 class GameScreen extends Screen {
-    constructor(slug: string) {
-        super(slug);
+    settings: { cards: string; difficulty: string; placeholders: string };
+
+    constructor(props: {
+        slug: string;
+        settings: { cards: string; difficulty: string; placeholders: string };
+    }) {
+        super(props.slug);
+
+        this.settings = props.settings;
+
+        this.init();
     }
 
     getTemplate() {
         return gameTemplate();
+    }
+
+    init() {
+        console.log(this.settings);
     }
 }
 

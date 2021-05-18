@@ -1,4 +1,4 @@
-import Component from './absComponent';
+import Component from './component';
 
 abstract class Screen extends Component {
     slug: string;

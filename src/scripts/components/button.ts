@@ -31,7 +31,7 @@
 
 // export default Button;
 
-import Component from './abs/absComponent';
+import Component from './abs/component';
 
 const buttonTemplate = (props: { text: string; extraClass: string }) => {
     const { text, extraClass } = props;
