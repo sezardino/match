@@ -18,4 +18,17 @@ const DEFAULT_SETTINGS = {
     placeholders: 'canyon'
 };
 
-export { RENDER_POSITION, SLUGS, DEFAULT_SETTINGS };
+const GAME_OVER_TEXT = {
+    WIN: () => `Congratulations!, You successfully found all matches on
+        minutes`,
+    LOSE: () => `You Are Lose! Maybe you can try later`
+};
+
+const DIFFICULTY = {
+    easy: 12,
+    normal: 16,
+    insane: 24,
+    god: 40
+};
+
+export { RENDER_POSITION, SLUGS, DEFAULT_SETTINGS, GAME_OVER_TEXT, DIFFICULTY };

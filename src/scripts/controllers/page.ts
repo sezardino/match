@@ -19,6 +19,7 @@ import {
     GameScreen,
     Screen
 } from '../components/_index';
+import GameController from './game';
 
 type PageControllerProps = {
     root: string;
@@ -41,6 +42,7 @@ class PageController {
     currentScreen: string;
     userSettings: { cards: string; difficulty: string; placeholders: string };
     user: { name: string } | null;
+    gameController: GameController;
 
     constructor(props: PageControllerProps) {
         this.props = props;
@@ -84,12 +86,12 @@ class PageController {
     }
 
     startGameHandler() {
-        const game = new GameScreen({
-            slug: 'game',
-            settings: this.userSettings
-        });
-        this.router.changeRouteToGame(this.currentScreen, game);
-        this.currentScreen = SLUGS.GAME;
+        if (!this.gameController) {
+            this.gameController = new GameController(this.userSettings);
+            this.root.element.innerHTML = '';
+            this.gameController.init(this.root.element);
+            this.gameController.popup = this.popup;
+        }
     }
 
     private checkUser() {
@@ -139,7 +141,8 @@ class PageController {
         this.router = new Router(this.root.element);
         this.currentScreen = pathname === '/' ? SLUGS.ABOUT : pathname.slice(1);
         const screens = Object.entries(this.screens);
-        screens.forEach(([key, screen]) => {
+        screens.forEach((item) => {
+            const [key, screen] = item;
             this.router.addRoute(screen.slug, screen);
             if (this[`${key}Handler`]) {
                 this[`${key}Handler`]();

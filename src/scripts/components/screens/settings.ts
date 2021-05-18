@@ -62,17 +62,6 @@ class SettingsScreen extends Screen {
         return settingsTemplate();
     }
 
-    // getElement() {
-    //     super.getElement();
-    //     this.form = this.element.querySelector('form');
-    //     this.addListeners();
-    // }
-
-    removePage() {
-        super.removePage();
-        this.removeListeners();
-    }
-
     addListeners() {
         this.form.addEventListener('submit', this.formHandler);
     }

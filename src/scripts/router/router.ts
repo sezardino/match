@@ -1,5 +1,6 @@
 import Screen from '../components/abs/screen';
 import { GameScreen } from '../components/_index';
+import GameController from '../controllers/game';
 import { SLUGS } from '../utils/constants';
 import render from '../utils/utils';
 
@@ -11,7 +12,6 @@ class Router {
 
     constructor(root: Element) {
         this.routes = new Map();
-        this.game = null;
         this.root = root;
 
         this.init();
@@ -29,17 +29,6 @@ class Router {
         this.root.innerHTML = '<h2>Cant find page</h2>';
     }
 
-    changeRouteToGame(current: string, game: Screen) {
-        const currentPage = this.routes.get(current);
-        if (currentPage) {
-            currentPage?.removeElement();
-        } else {
-            this.root.innerHTML = '';
-        }
-        history.pushState({ slug: 'game' }, '', 'game');
-        render.render(this.root, game);
-    }
-
     changeRoute(props: { current: string; prev: string }): void {
         const { current, prev } = props;
         const prevPage =
@@ -48,7 +37,7 @@ class Router {
         const currentUrl = current === 'home' ? '/' : current;
         history.pushState({ slug: currentUrl }, '', currentUrl);
         if (prevPage) {
-            prevPage.removeElement();
+            prevPage?.removeElement();
         } else {
             this.root.innerHTML = '';
         }

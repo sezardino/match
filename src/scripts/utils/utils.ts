@@ -92,6 +92,20 @@ class UtilFunctions {
         });
         return formData;
     }
+
+    getTime(time: number): Array<number> {
+        const min = Math.floor(time / 60);
+        const sec = time % 60;
+        return [sec, min];
+    }
+
+    formatTime(time: number): { sec: string; min: string } {
+        const [sec, min] = this.getTime(time).map((number) => {
+            const stringNumber = number.toString();
+            return stringNumber.length > 1 ? stringNumber : '0' + stringNumber;
+        });
+        return { min, sec };
+    }
 }
 
 export default new UtilFunctions();

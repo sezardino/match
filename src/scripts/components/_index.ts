@@ -13,6 +13,10 @@ import {
     GameScreen,
     AboutScreen
 } from './screens/_index';
+import Timer from './timer';
+import GameWrapper from './game';
+import Card from './card';
+import Results from './results';
 
 export {
     Button,
@@ -28,5 +32,9 @@ export {
     AboutScreen,
     SettingsScreen,
     GameScreen,
-    Screen
+    Screen,
+    Timer,
+    GameWrapper,
+    Card,
+    Results
 };

@@ -42,7 +42,7 @@ class Popup extends Component {
 
     close() {
         this.element.classList.remove(this.popupOpenClass);
-        this.inner.remove();
+        this.inner.removeElement();
         this.inner = null;
     }
 
