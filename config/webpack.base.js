@@ -1,16 +1,18 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: "./src/index.ts",
+    entry: './src/index.ts',
 
     optimization: {
         splitChunks: {
-            chunks: "all",
-        },
+            chunks: 'all'
+        }
     },
 
     resolve: {
-        extensions: [".tsx", ".ts", ".js"],
+        extensions: ['.tsx', '.ts', '.js']
     },
 
     module: {
@@ -19,46 +21,54 @@ module.exports = {
                 test: /\.tsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
-                    loader: "babel-loader",
+                    loader: 'babel-loader',
                     options: {
                         presets: [
-                            "@babel/preset-env",
-                            "@babel/preset-typescript",
-                        ],
-                    },
-                },
+                            '@babel/preset-env',
+                            '@babel/preset-typescript'
+                        ]
+                    }
+                }
             },
             {
                 test: /\.(png|jpg|jpeg|gif)$/i,
-                type: "asset/resource",
+                type: 'asset/resource',
                 generator: {
-                    filename: "assets/images/[hash][ext][query]",
-                },
+                    filename: 'assets/images/[hash][ext][query]'
+                }
             },
             {
                 test: /\.svg$/i,
-                type: "asset/resource",
+                type: 'asset/resource',
                 generator: {
-                    filename: "assets/icons/[hash][ext][query]",
-                },
+                    filename: 'assets/icons/[hash][ext][query]'
+                }
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: "asset/resource",
+                type: 'asset/resource',
                 generator: {
-                    filename: "assets/fonts/[hash][ext][query]",
-                },
+                    filename: 'assets/fonts/[hash][ext][query]'
+                }
             },
             {
                 test: /\.html$/i,
-                loader: "html-loader",
-            },
-        ],
+                loader: 'html-loader'
+            }
+        ]
     },
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./src/index.html",
+            template: './src/index.html'
         }),
-    ],
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, '../src/assets/images/cards'),
+                    to: path.resolve(__dirname, '../_dist/assets/images/cards')
+                }
+            ]
+        })
+    ]
 };
