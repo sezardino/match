@@ -1,7 +1,6 @@
 import about from '../../assets/svg/about.svg';
 import score from '../../assets/svg/best.svg';
 import settings from '../../assets/svg/settings.svg';
-import AbstractComponent from './absComponent';
 import Component from './component';
 
 const navTemplate = () => `<nav class="nav">
@@ -38,7 +37,7 @@ const navTemplate = () => `<nav class="nav">
 </ul>
 </nav>`;
 
-class Nav extends AbstractComponent {
+class Nav extends Component {
     activeLinkClass: string;
     currentLink: string;
     links: NodeListOf<HTMLAnchorElement>;
@@ -48,8 +47,7 @@ class Nav extends AbstractComponent {
         this.activeLinkClass = 'nav__link--current';
         this.currentLink = props.currentLink;
 
-        // this.changeCurrentLink(props.currentLink);
-        console.log(this);
+        this.init();
     }
 
     getTemplate(): string {
@@ -57,9 +55,7 @@ class Nav extends AbstractComponent {
     }
 
     changeCurrentLink(link: string) {
-        console.log(this);
-        const links = this.element.querySelectorAll('a');
-        links.forEach((item: HTMLAnchorElement) => {
+        this.links.forEach((item: HTMLAnchorElement) => {
             if (item.pathname.includes(link)) {
                 item.classList.add(this.activeLinkClass);
                 this.currentLink = link;
@@ -70,8 +66,7 @@ class Nav extends AbstractComponent {
     }
 
     linksListener(handler: (pathname: string) => void): void {
-        const links = this.element.querySelectorAll('a');
-        links.forEach((link) => {
+        this.links.forEach((link) => {
             link.addEventListener('click', (evt) => {
                 evt.preventDefault();
                 const target = evt.target as HTMLAnchorElement;
@@ -83,14 +78,11 @@ class Nav extends AbstractComponent {
         });
     }
 
-    // onLoad() {
-    //     super.onLoad();
-    //     console.log('aaa');
-    //     console.log(this);
-
-    //     this.links = this.element.querySelectorAll('a');
-    //     this.changeCurrentLink(this.currentLink);
-    // }
+    init() {
+        super.init();
+        this.links = this.element.querySelectorAll('a');
+        this.changeCurrentLink(this.currentLink);
+    }
 }
 
 export default Nav;

@@ -4,8 +4,8 @@ import RegisterForm from './registerForm';
 
 const popupTemplate = () => `
 <div class="popup">
-  <div class="popup__inner">
-  </div>
+    <div class="popup__inner">
+    </div>
 </div>`;
 
 class Popup extends Component {
@@ -16,14 +16,17 @@ class Popup extends Component {
 
     constructor() {
         super();
-        this.template = popupTemplate();
         this.inner = null;
 
         this.popupClass = 'popup';
         this.popupOpenClass = 'popup--open';
         this.popupInnerSelector = '.popup__inner';
 
-        this.onLoad();
+        this.init();
+    }
+
+    getTemplate() {
+        return popupTemplate();
     }
 
     open(inner: Component | RegisterForm): void {
@@ -43,8 +46,8 @@ class Popup extends Component {
         this.inner = null;
     }
 
-    onLoad() {
-        super.onLoad();
+    init() {
+        super.init();
 
         this.element.addEventListener('click', (evt: MouseEvent) => {
             if (evt.target.classList.contains(this.popupClass)) {

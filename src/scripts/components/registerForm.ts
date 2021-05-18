@@ -73,11 +73,13 @@ class RegisterForm extends Component {
 
     constructor() {
         super();
-        this.template = registerFormTemplate();
         this.cancelButtonSelector = '.form__cancel';
 
-        this.onLoad();
-        this.count = 1;
+        this.init();
+    }
+
+    getTemplate() {
+        return registerFormTemplate();
     }
 
     submitHandler(handler: (data: {}) => void): void {
@@ -100,8 +102,8 @@ class RegisterForm extends Component {
         this.element = null;
     }
 
-    onLoad() {
-        super.onLoad();
+    init() {
+        super.init();
 
         this.form = this.element.querySelector('form');
 

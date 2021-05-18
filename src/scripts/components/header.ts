@@ -18,30 +18,28 @@ const headerTemplate = () => `
     <div class="header__user"></div>
 </header>`;
 
-type HeaderProps = {
-    user: { name: string } | null;
-};
-
 class Header extends Component {
     user: { name: string };
     userSelector: string;
     navSelector: string;
     signIn: Button;
     nav: Nav;
-    constructor(props: HeaderProps) {
+    constructor(props: { user: { name: string } } | null) {
         super();
         this.user = props.user;
-        this.template = headerTemplate();
         this.userSelector = '.header__user';
         this.navSelector = '.header__nav';
 
-        this.onLoad();
+        this.init();
+    }
+
+    getTemplate() {
+        return headerTemplate();
     }
 
     controlUserPlaceHolder(content: any): void {
         const userRoot = this.element.querySelector(this.userSelector);
-        // utils.render(userRoot, content);
-        // utils.renderAB(userRoot, content);
+        utils.render(userRoot, content);
     }
 
     controlNavPlaceHolder(content: any): void {

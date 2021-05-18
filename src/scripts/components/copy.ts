@@ -10,9 +10,12 @@ const copyTemplate = () => `
 class Copy extends Component {
     constructor() {
         super();
-        this.template = copyTemplate();
 
-        this.onLoad();
+        this.init();
+    }
+
+    getTemplate() {
+        return copyTemplate();
     }
 }
 

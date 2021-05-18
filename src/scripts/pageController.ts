@@ -1,6 +1,6 @@
 import api from './api/api';
 import Button from './components/button';
-import Component from './components/component';
+import Component from './components/components';
 import Copy from './components/copy';
 import Header from './components/header';
 import Main from './components/main';

@@ -8,13 +8,17 @@ class UtilFunctions {
         return div.children[0];
     }
 
-    createElement(template) {
+    createElement(template: string) {
         const div = document.createElement('div');
         div.innerHTML = template;
         return div.firstElementChild;
     }
 
-    render(container, component, place = 'afterbegin') {
+    render(
+        container: Element,
+        component: Component,
+        place: InsertPosition = 'afterbegin'
+    ) {
         const element = component.getElement();
         container.insertAdjacentElement(place, element);
     }

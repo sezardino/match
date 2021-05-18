@@ -13,9 +13,12 @@ const userTemplate = () => `
 class UserView extends Component {
     constructor() {
         super();
-        this.template = userTemplate();
 
-        this.onLoad();
+        this.init();
+    }
+
+    getTemplate() {
+        return userTemplate();
     }
 
     buttonHandler(handler: () => void) {
@@ -25,10 +28,6 @@ class UserView extends Component {
                 evt.preventDefault();
                 handler();
             });
-    }
-
-    onLoad() {
-        super.onLoad();
     }
 }
 
