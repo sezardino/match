@@ -1,6 +1,5 @@
-import { PageProps } from '../interfaces';
-import utils from '../utils/utils';
-import Page from './page';
+import utils from '../../utils/utils';
+import Screen from '../abs/absScreen';
 
 const settingsTemplate = () => `
 <section class="settings">
@@ -49,22 +48,25 @@ const settingsTemplate = () => `
     </form>
 </section>`;
 
-class Settings extends Page {
+class SettingsScreen extends Screen {
     form: HTMLFormElement;
     handler: (formData: {}) => void | null;
 
     constructor(slug: string) {
         super(slug);
-        this.template = settingsTemplate();
 
         this.formHandler = this.formHandler.bind(this);
     }
 
-    getElement() {
-        super.getElement();
-        this.form = this.element.querySelector('form');
-        this.addListeners();
+    getTemplate() {
+        return settingsTemplate();
     }
+
+    // getElement() {
+    //     super.getElement();
+    //     this.form = this.element.querySelector('form');
+    //     this.addListeners();
+    // }
 
     removePage() {
         super.removePage();
@@ -86,4 +88,4 @@ class Settings extends Page {
     }
 }
 
-export default Settings;
+export default SettingsScreen;

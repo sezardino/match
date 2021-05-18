@@ -1,5 +1,4 @@
-import { PageProps } from '../interfaces';
-import Page from './page';
+import Screen from '../abs/absScreen';
 
 const scoreTemplate = () => `
 <section class="shore">
@@ -71,11 +70,14 @@ const scoreTemplate = () => `
     </ul>
 </section>`;
 
-class Score extends Page {
+class ScoreScreen extends Screen {
     constructor(slug: string) {
         super(slug);
-        this.template = scoreTemplate();
+    }
+
+    getTemplate() {
+        return scoreTemplate();
     }
 }
 
-export default Score;
+export default ScoreScreen;

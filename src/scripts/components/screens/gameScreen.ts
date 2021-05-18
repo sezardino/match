@@ -1,4 +1,4 @@
-import Page from './page';
+import Screen from '../abs/absScreen';
 
 const gameTemplate = () => `
 <section class="game">
@@ -148,11 +148,14 @@ const gameTemplate = () => `
 </section>
 `;
 
-class Game extends Page {
+class GameScreen extends Screen {
     constructor(slug: string) {
         super(slug);
-        this.template = gameTemplate();
+    }
+
+    getTemplate() {
+        return gameTemplate();
     }
 }
 
-export default Game;
+export default GameScreen;

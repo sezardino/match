@@ -1,8 +1,8 @@
-import Page from '../pages/page';
+import Screen from '../components/abs/absScreen';
 import render from '../utils/utils';
 
 class Router {
-    routes: Map<string, Page>;
+    routes: Map<string, Screen>;
     root: Element;
     activeLinkClass: string;
 
@@ -13,7 +13,7 @@ class Router {
         this.init();
     }
 
-    addRoute(slug: string, screen: Page) {
+    addRoute(slug: string, screen: Screen) {
         this.routes.set(slug, screen);
     }
 
@@ -25,14 +25,20 @@ class Router {
         this.root.innerHTML = '<h2>Cant find page</h2>';
     }
 
-    private changeRoute(props: { current: string; prev: string }): void {
+    changeRouteToGame(current: string, game) {
+        console.log(game);
+        const currentPage = this.routes.get(current);
+        currentPage.removeElement();
+    }
+
+    changeRoute(props: { current: string; prev: string }): void {
         const { current, prev } = props;
         const prevPage = this.routes.get(prev);
         const currentPage = this.routes.get(current);
         const currentUrl = current === 'home' ? '/' : current;
         history.pushState({ slug: currentUrl }, '', currentUrl);
         if (prevPage) {
-            prevPage.removePage();
+            prevPage.removeElement();
         } else {
             this.root.innerHTML = '';
         }

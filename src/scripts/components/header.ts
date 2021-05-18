@@ -1,5 +1,5 @@
 import utils from '../utils/utils';
-import Component from './component';
+import Component from './abs/absComponent';
 
 import logo from '../../assets/svg/logo.svg';
 import Button from './button';
@@ -39,6 +39,7 @@ class Header extends Component {
 
     controlUserPlaceHolder(content: any): void {
         const userRoot = this.element.querySelector(this.userSelector);
+        userRoot.innerHTML = '';
         utils.render(userRoot, content);
     }
 

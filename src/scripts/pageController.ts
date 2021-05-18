@@ -1,33 +1,39 @@
 import api from './api/api';
-import Button from './components/button';
-import Component from './components/components';
-import Copy from './components/copy';
-import Header from './components/header';
-import Main from './components/main';
-import Nav from './components/nav';
-import Popup from './components/popup';
-import RegisterForm from './components/registerForm';
-import UserView from './components/user';
 import { DEFAULT_SETTINGS, SLUGS } from './constants';
-import About from './pages/about';
-import Game from './pages/game';
-import Score from './pages/score';
-import Settings from './pages/settings';
 import Router from './router';
 import utils from './utils/utils';
+
+import {
+    Button,
+    Component,
+    Copy,
+    Header,
+    Main,
+    Nav,
+    Popup,
+    RegisterForm,
+    UserView,
+    ScoreScreen,
+    AboutScreen,
+    SettingsScreen,
+    GameScreen,
+    Screen
+} from './components/_index';
 
 type PageControllerProps = {
     root: string;
 };
-
-const LS_NAME = 'math-game-user';
 
 class PageController {
     root: Component;
     header: Header;
     userView: UserView;
     props: PageControllerProps;
-    screens: { about: About; settings: Settings; score: Score; game: Game };
+    screens: {
+        about: AboutScreen;
+        settings: SettingsScreen;
+        score: ScoreScreen;
+    };
     popup: Popup;
     signIn: Button;
     nav: Nav;
@@ -39,10 +45,9 @@ class PageController {
     constructor(props: PageControllerProps) {
         this.props = props;
         this.screens = {
-            about: new About('home'),
-            settings: new Settings('settings'),
-            score: new Score('score'),
-            game: new Game('game')
+            about: new AboutScreen('home'),
+            settings: new SettingsScreen('settings'),
+            score: new ScoreScreen('score')
         };
         this.user = api.getUserData();
         this.userSettings = api.getSettingsData() || DEFAULT_SETTINGS;
@@ -78,11 +83,15 @@ class PageController {
         return form;
     }
 
+    startGameHandler() {
+        this.router.changeRouteToGame(this.currentScreen);
+    }
+
     private checkUser() {
         if (this.user?.name) {
             this.userView = new UserView();
             this.userView.buttonHandler(() => {
-                console.log('start');
+                this.startGameHandler();
             });
             this.header.controlUserPlaceHolder(this.userView);
         } else {
@@ -116,7 +125,6 @@ class PageController {
     private settingsHandler() {
         const component = this.screens.settings;
         component.handler = (data) => {
-            console.log(data);
             api.setSettingsData(data);
         };
     }

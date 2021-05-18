@@ -1,4 +1,4 @@
-import Component from '../components/component';
+import Component from '../components/abs/absComponent';
 import { RENDER_POSITION } from '../constants';
 import Page from '../pages/page';
 class UtilFunctions {

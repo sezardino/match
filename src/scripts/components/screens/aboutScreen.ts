@@ -1,4 +1,6 @@
-const about = () => `
+import Screen from '../abs/absScreen';
+
+const aboutTemplate = () => `
 <section class="game-info">
     <h2 class="game-info__title">How to play?</h2>
     <ol class="game-info__list">
@@ -37,7 +39,16 @@ const about = () => `
             ></div>
         </li>
     </ol>
-</section>
-`;
+</section>`;
 
-export default about;
+class AboutScreen extends Screen {
+    constructor(slug: string) {
+        super(slug);
+    }
+
+    getTemplate() {
+        return aboutTemplate();
+    }
+}
+
+export default AboutScreen;

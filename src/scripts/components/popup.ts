@@ -1,5 +1,5 @@
 import render from '../utils/utils';
-import Component from './component';
+import Component from './abs/absComponent';
 import RegisterForm from './registerForm';
 
 const popupTemplate = () => `
