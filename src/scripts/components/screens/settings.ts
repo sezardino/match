@@ -14,7 +14,6 @@ const settingsTemplate = () => `
                 class="settings__select">
                     <option value="bear">Bear</option>
                     <option value="dog">Dog</option>
-                    <option value="eagle">Eagle</option>
                     <option value="nature">Nature</option>
                 </select>
             </li>
@@ -56,6 +55,8 @@ class SettingsScreen extends Screen {
         super(slug);
 
         this.formHandler = this.formHandler.bind(this);
+
+        this.init();
     }
 
     getTemplate() {
@@ -74,6 +75,12 @@ class SettingsScreen extends Screen {
         evt.preventDefault();
         const formData = utils.getFormData(this.form);
         this.handler(formData);
+    }
+
+    init() {
+        super.init();
+        this.form = this.element.querySelector('form');
+        this.addListeners();
     }
 }
 

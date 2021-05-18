@@ -106,6 +106,35 @@ class UtilFunctions {
         });
         return { min, sec };
     }
+
+    getRandNumInRange(min: number, max: number) {
+        return Math.floor(Math.random() * max + min);
+    }
+
+    getMathArray(maxLength: number) {
+        const workArr = Array(maxLength / 2).fill(null);
+        workArr.map((_, index) => {
+            let number;
+            do {
+                number = this.getRandNumInRange(1, 30);
+            } while (workArr.includes(number));
+            workArr[index] = number;
+        });
+
+        let finalArray = Array(maxLength).fill(null);
+        workArr.map((item) => {
+            let index,
+                count = 0;
+            do {
+                index = this.getRandNumInRange(0, finalArray.length);
+                if (finalArray[index] === null) {
+                    finalArray[index] = item;
+                    count++;
+                }
+            } while (finalArray[index] !== null && count < 2);
+        });
+        return finalArray;
+    }
 }
 
 export default new UtilFunctions();
