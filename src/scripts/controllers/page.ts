@@ -16,10 +16,10 @@ import {
     ScoreScreen,
     AboutScreen,
     SettingsScreen,
-    GameScreen,
-    Screen
+    SettingsForm
 } from '../components/_index';
 import GameController from './game';
+import { userSettings } from '../interfaces';
 
 type PageControllerProps = {
     root: string;
@@ -129,11 +129,17 @@ class PageController {
         this.header.controlNavPlaceHolder(this.nav);
     }
 
+    private settingsFormHandler(data: userSettings) {
+        api.setSettingsData(data);
+        this.userSettings = data;
+    }
+
     private settingsHandler() {
         const component = this.screens.settings;
-        component.handler = (data) => {
-            api.setSettingsData(data);
-        };
+        const settingsForm = new SettingsForm(this.userSettings);
+        settingsForm.formHandler = (data: userSettings) =>
+            this.settingsFormHandler(data);
+        component.formPlaceholder(settingsForm);
     }
 
     private routerInit(): void {

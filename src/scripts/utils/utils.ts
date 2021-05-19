@@ -80,14 +80,14 @@ class UtilFunctions {
         );
     }
 
-    getFormData(form: HTMLFormElement): {} {
+    getFormData(form: HTMLFormElement): { [key: string]: string } {
         const inputs = form.querySelectorAll('input');
         const selects = form.querySelectorAll('select');
-        const formData = {};
+        const formData: { [key: string]: string } = {};
         inputs.forEach((input: HTMLInputElement) => {
             formData[input.name] = input.value;
         });
-        selects.forEach((input: HTMLInputElement) => {
+        selects.forEach((input: HTMLSelectElement) => {
             formData[input.name] = input.value;
         });
         return formData;
