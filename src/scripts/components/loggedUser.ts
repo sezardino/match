@@ -10,7 +10,7 @@ const userTemplate = () => `
     </div>
   </div>`;
 
-class UserView extends Component {
+class LoggedUser extends Component {
     constructor() {
         super();
 
@@ -31,4 +31,4 @@ class UserView extends Component {
     }
 }
 
-export default UserView;
+export default LoggedUser;

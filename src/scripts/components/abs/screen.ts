@@ -1,14 +1,12 @@
-import Component from './component';
+import SmartComponent from './smartComponent';
 
-abstract class Screen extends Component {
+abstract class Screen extends SmartComponent {
     slug: string;
     constructor(slug: string) {
         super();
 
         this.slug = slug;
     }
-
-    abstract getTemplate(): string;
 }
 
 export default Screen;

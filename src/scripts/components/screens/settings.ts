@@ -25,9 +25,10 @@ class SettingsScreen extends Screen {
         return settingsTemplate();
     }
 
-    formPlaceholder(content: Component) {
+    formPlaceholder(component: Component) {
         const formRoot = this.element.querySelector(this.formSelector);
-        utils.render(formRoot, content);
+        this.components.push(component);
+        utils.render(formRoot, component);
     }
 }
 

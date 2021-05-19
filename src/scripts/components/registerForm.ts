@@ -82,7 +82,7 @@ class RegisterForm extends Component {
         return registerFormTemplate();
     }
 
-    submitHandler(handler: (data: {}) => void): void {
+    set submitHandler(handler: (data: {}) => void) {
         this.form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             const formData = utils.getFormData(evt.target as HTMLFormElement);

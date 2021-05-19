@@ -6,7 +6,7 @@ import Main from './main';
 import Nav from './nav';
 import Popup from './popup';
 import RegisterForm from './registerForm';
-import UserView from './user';
+import UserView from './loggedUser';
 import {
     SettingsScreen,
     ScoreScreen,
