@@ -18,8 +18,6 @@ class SettingsScreen extends Screen {
 
         this.formSelector = '.settings__form';
 
-        this.formHandler = this.formHandler.bind(this);
-
         this.init();
     }
 
@@ -27,30 +25,9 @@ class SettingsScreen extends Screen {
         return settingsTemplate();
     }
 
-    addListeners() {
-        this.form.addEventListener('submit', this.formHandler);
-    }
-
-    removeListeners() {
-        this.form.removeEventListener('submit', this.formHandler);
-    }
-
-    formHandler(evt: Event) {
-        evt.preventDefault();
-        const formData = utils.getFormData(this.form);
-        this.handler(formData);
-    }
-
     formPlaceholder(content: Component) {
         const formRoot = this.element.querySelector(this.formSelector);
         utils.render(formRoot, content);
-    }
-
-    init() {
-        super.init();
-
-        // this.form = this.element.querySelector('form');
-        // this.addListeners();
     }
 }
 

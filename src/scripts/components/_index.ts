@@ -17,6 +17,7 @@ import Timer from './timer';
 import GameWrapper from './game';
 import Card from './card';
 import Results from './results';
+import SettingsForm from './settingsForm';
 
 export {
     Button,
@@ -36,5 +37,6 @@ export {
     Timer,
     GameWrapper,
     Card,
-    Results
+    Results,
+    SettingsForm
 };

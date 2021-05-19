@@ -1,3 +1,5 @@
+import { userSettings } from '../interfaces';
+import utils from '../utils/utils';
 import { Component } from './_index';
 
 const settingsFormTemplate = () => `
@@ -41,18 +43,46 @@ const settingsFormTemplate = () => `
         <button class="button button--primary settings-form__button">
             Save
         </button>
+        <span class="form-settings__suc hidden">Your data has been successfully saved</span>
     </form>
 `;
 
 class SettingsForm extends Component {
-    constructor() {
+    settings: userSettings;
+    constructor(settings: userSettings) {
         super();
+        this.settings = settings;
 
         this.init();
     }
 
+    set formHandler(handler: (data: userSettings) => void) {
+        this.addFormEvent(handler);
+    }
+
     getTemplate() {
         return settingsFormTemplate();
+    }
+
+    addFormEvent(handler: (data: userSettings) => void) {
+        this.element.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            const formData = utils.getFormData(
+                evt.target as HTMLFormElement
+            ) as userSettings;
+            this.element
+                .querySelector('.form-settings__suc')
+                .classList.remove('hidden');
+            handler(formData);
+        });
+    }
+
+    init() {
+        super.init();
+
+        this.element.querySelectorAll('select').forEach((item) => {
+            item.value = this.settings[item.name];
+        });
     }
 }
 
