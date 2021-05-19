@@ -1,0 +1,41 @@
+.settings-form {
+    &__label {
+        display: flex;
+        flex-direction: column;
+
+        &:not(:last-of-type) {
+            margin-bottom: 40px;
+        }
+    }
+
+    &__label-text {
+        font-size: 1.9rem;
+        line-height: 2.1rem;
+        font-weight: 500;
+
+        margin-bottom: 15px;
+    }
+
+    &__select {
+        font-size: 1.6rem;
+        line-height: 1.9rem;
+        font-weight: 400;
+
+        width: 150px;
+
+        border: none;
+
+        padding: 10px;
+
+        cursor: pointer;
+
+        &:focus,
+        &:active {
+            outline: none;
+        }
+    }
+
+    &__button {
+        margin-top: 40px;
+    }
+}

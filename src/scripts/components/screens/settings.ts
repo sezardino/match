@@ -1,58 +1,22 @@
 import utils from '../../utils/utils';
+import Component from '../abs/component';
 import Screen from '../abs/screen';
 
 const settingsTemplate = () => `
 <section class="settings">
-<h1 class="hidden">Settings</h1>
-    <form class="settings__form">
-        <ul class="settings__list">
-            <li class="settings__item">
-                <h2 class="settings__title">Game Cards</h2>
-                <select
-                name="cards"
-                id="cards"
-                class="settings__select">
-                    <option value="bear">Bear</option>
-                    <option value="dog">Dog</option>
-                    <option value="nature">Nature</option>
-                </select>
-            </li>
-                <li class="settings__item">
-                <h2 class="settings__title">Placeholder Card</h2>
-                <select
-                name="placeholders"
-                id="placeholders"
-                class="settings__select">
-                    <option value="canyon">Canyon</option>
-                    <option value="city">City</option>
-                    <option value="forest">Forest</option>
-                    <option value="mounts">Mounts</option>
-                    <option value="shine">Shine</option>
-                </select>
-            </li>
-            <li class="settings__item">
-                <h2 class="settings__title">Difficulty</h2>
-                <select
-                name="difficulty"
-                id="difficulty"
-                class="settings__select">
-                    <option value="easy">Easy</option>
-                    <option value="normal">Normal</option>
-                    <option value="insane">Insane</option>
-                    <option value="god">God!</option>
-                </select>
-            </li>
-        </ul>
-        <button class="button button--primary settings__button" >Save</button>
-    </form>
+    <h1 class="hidden">Settings</h1>
+    <div class="settings__form"></div>
 </section>`;
 
 class SettingsScreen extends Screen {
     form: HTMLFormElement;
     handler: (formData: {}) => void | null;
+    formSelector: string;
 
     constructor(slug: string) {
         super(slug);
+
+        this.formSelector = '.settings__form';
 
         this.formHandler = this.formHandler.bind(this);
 
@@ -77,10 +41,16 @@ class SettingsScreen extends Screen {
         this.handler(formData);
     }
 
+    formPlaceholder(content: Component) {
+        const formRoot = this.element.querySelector(this.formSelector);
+        utils.render(formRoot, content);
+    }
+
     init() {
         super.init();
-        this.form = this.element.querySelector('form');
-        this.addListeners();
+
+        // this.form = this.element.querySelector('form');
+        // this.addListeners();
     }
 }
 
