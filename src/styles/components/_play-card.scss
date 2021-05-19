@@ -4,8 +4,7 @@
     padding: 0;
 
     width: 100%;
-    max-width: 170px;
-    min-height: 170px;
+    height: 100%;
 
     display: flex;
     align-items: center;
@@ -57,11 +56,10 @@
             display: initial;
         }
         &.play-card--valid {
-          background-color: rgba(green, 0.5);
+            background-color: rgba(green, 0.5);
         }
         &.play-card--invalid {
-          background-color: rgba(red, 0.5);
+            background-color: rgba(red, 0.5);
         }
-
     }
 }

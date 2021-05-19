@@ -7,21 +7,24 @@
 
     &__item {
         display: flex;
-        background-color: var(--blue2);
-        opacity: 0.3;
-        &--current {
-          background: transparent;
-            opacity: 1;
-        }
     }
 
     &__link {
+        background-color: var(--blue2);
+        opacity: 0.3;
+
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
 
         margin: auto 0;
+        height: 100%;
         padding: 0 15px;
+        &--current {
+            background: transparent;
+            opacity: 1;
+        }
     }
 
     &__link-text {

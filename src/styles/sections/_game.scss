@@ -18,8 +18,24 @@
         padding: 15px;
 
         display: grid;
-        grid-template-columns: repeat(4, 170px);
         row-gap: 10px;
         column-gap: 15px;
+
+        &--easy {
+            grid-template-columns: repeat(4, 180px);
+            grid-template-rows: repeat(4, 180px);
+        }
+        &--normal {
+            grid-template-columns: repeat(6, 150px);
+            grid-template-rows: repeat(6, 150px);
+        }
+        &--insane {
+            grid-template-columns: repeat(8, 110px);
+            grid-template-rows: repeat(8, 110px);
+        }
+        &--god {
+            grid-template-columns: repeat(10, 85px);
+            grid-template-rows: repeat(6, 85px);
+        }
     }
 }

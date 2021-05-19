@@ -1,7 +1,7 @@
 .popup {
     position: absolute;
 
-    display: flex;
+    display: none;
 
     top: 0;
     left: 0;
@@ -17,5 +17,9 @@
         max-width: 500px;
 
         padding: 15px;
+    }
+
+    &--open {
+        display: flex;
     }
 }

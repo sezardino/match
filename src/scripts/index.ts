@@ -1,9 +1,7 @@
-import Router from './router';
+import PageController from './controllers/page';
 
-const router = new Router();
-
-router.addRoute('/about', () => console.log(1))
-
-document.querySelectorAll('a').forEach((a) => {
-    router.createLink(a);
+window.addEventListener('load', () => {
+    new PageController({
+        root: 'body'
+    });
 });
