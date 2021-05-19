@@ -5,7 +5,7 @@ const cardTemplate = (props: {
     placeholder: string;
     type: string;
 }) => `
-  <button class="play-card play-card--${props.placeholder}">
+  <button class="play-card">
   ${props.value}
     <div class="play-card__image-wrapper">
       <img src="./assets/images/cards/${props.type}/${props.value}.svg" alt="${props.type}" class="play-card__image" />
@@ -13,6 +13,7 @@ const cardTemplate = (props: {
   </button>
 `;
 
+// play-card--${props.placeholder}
 class Card extends Component {
     props: { value: number; placeholder: string; type: string };
     openClass: string;
@@ -38,8 +39,11 @@ class Card extends Component {
         this.element.classList.add(this.openClass);
     }
 
-    close() {
-        this.element.classList.remove(this.openClass);
+    close(timer = 2000) {
+        setTimeout(() => {
+            this.element.classList.remove(this.openClass);
+            this.removeInvalid();
+        }, timer);
     }
 
     addInvalid() {
@@ -63,7 +67,6 @@ class Card extends Component {
             const card = target.closest('.play-card');
             if (!card.classList.contains(this.openClass)) {
                 this.open();
-                setTimeout(this.close, 5000);
                 handler(this);
             }
         });

@@ -15,7 +15,9 @@ class GameController {
     timer: Timer;
     root: Element;
     popup: Popup;
-    openedCards: Array<Card>;
+    openedCard: Card | null;
+    playGround: Array<Card>;
+    moves: Array<Array<Card>>;
 
     constructor(settings: {
         cards: string;
@@ -23,15 +25,22 @@ class GameController {
         difficulty: string;
     }) {
         this.settings = settings;
-        this.openedCards = [];
+
+        this.playGround = [];
+        this.openedCard = null;
+
+        this.moves = [];
 
         this.gameOverHandler = this.gameOverHandler.bind(this);
     }
 
-    gameOverHandler(type: Boolean, time?: number) {
-        const resultText = type ? GAME_OVER_TEXT.WIN() : GAME_OVER_TEXT.LOSE();
+    gameOverHandler(type: Boolean) {
+        const resultText = type
+            ? GAME_OVER_TEXT.WIN(this.timer.time)
+            : GAME_OVER_TEXT.LOSE();
 
-        const results = new Results(resultText);
+        const result = new Results(resultText);
+        this.popup.open(result);
     }
 
     timerControls() {
@@ -43,31 +52,53 @@ class GameController {
         });
     }
 
-    checkCards() {
-        this.openedCards.map((item, index, arr) => {
-            let result = false;
-            if (index === 0) {
-                console.log(arr[index + 1].value);
-                result = item.value === arr[index + 1].value;
-            }
-            if (result) {
-                item.addValid();
-            } else {
-                item.addInvalid();
-                setTimeout(() => {
-                    item.removeInvalid();
-                    item.close();
-                }, 1000);
-            }
-        });
-        this.openedCards = [];
-    }
+    checkCards() {}
 
     addToLine(card: Card) {
-        this.openedCards.push(card);
-        if (this.openedCards.length === 2) {
-            this.checkCards();
+        const move = this.moves.find((item) => item.length === 1);
+        if (!move) {
+            this.moves.push([card]);
+            return;
         }
+        move.push(card);
+
+        const card1 = move[0];
+        const card2 = move[1];
+
+        if (card1.value === card2.value) {
+            move.map((item) => {
+                item.addValid();
+            });
+            this.playGround = this.playGround.filter(
+                (item) => item.value !== card1.value
+            );
+            if (this.playGround.length === 0) {
+                this.timer.stop(true);
+            }
+        } else {
+            move.map((item) => {
+                item.addInvalid();
+                item.close();
+            });
+        }
+
+        // if (this.openedCard) {
+        //     console.log(card.value);
+        //     console.log(this.openedCard.value);
+        //     if (card.value === this.openedCard.value) {
+        //         console.log(true);
+        //         this.openedCard = null;
+        //     } else if (card.value !== this.openedCard.value) {
+        //         console.log(false);
+        //         setTimeout(() => {
+        //             card.close();
+        //             this.openedCard.close();
+        //         }, 2000);
+        //         this.openedCard = null;
+        //     }
+        //     return;
+        // }
+        // this.openedCard = card;
     }
 
     gameInnerControls(): void {
@@ -76,7 +107,7 @@ class GameController {
 
         const numbers = utils.getMathArray(cardsLength);
 
-        const cardsArr = numbers.map((item) => {
+        this.playGround = numbers.map((item) => {
             const card = new Card({
                 value: item,
                 placeholder: placeholders,
@@ -86,7 +117,7 @@ class GameController {
             return card;
         });
         this.gameWrapper.useGameInnerPlaceholder((container) => {
-            cardsArr.map((item) => {
+            this.playGround.map((item) => {
                 utils.render(container, item);
             });
         });
