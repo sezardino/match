@@ -31,25 +31,9 @@ class Router {
     }
 
     changeRoute(props: { current: string; prev: string }): void {
-        // const { current, prev } = props;
-        // const prevPage =
-        //     prev === SLUGS.GAME ? this.game : this.routes.get(prev);
-        // console.log(prevPage);
-        // const currentPage = this.routes.get(current);
-        // const currentUrl = current === 'home' ? '/' : current;
-        // history.pushState({ slug: currentUrl }, '', currentUrl);
-        // if (prevPage) {
-        //     prevPage?.removeElement();
-        // } else {
-        //     this.root.innerHTML = '';
-        // }
-        // currentPage.getElement();
-        // render.render(this.root, currentPage);
-        console.log(this.routes);
         const { current, prev } = props;
         const currentPage = this.routes.get(current);
         const prevPage = this.routes.get(prev);
-        console.log(prev);
         history.pushState({ slug: current }, '', current);
         prevPage?.removeElement();
         utils.render(this.root, currentPage);

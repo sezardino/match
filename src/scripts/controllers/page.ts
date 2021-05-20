@@ -93,17 +93,13 @@ class PageController {
         }
     }
 
-    private settingsFormHandler(data: userSettings) {
-        api.setSettingsData(data);
-        this.userSettings = data;
-    }
-
     private settingsHandler() {
         const component = this.screens.settings;
-        const settingsForm = new SettingsForm(this.userSettings);
-        settingsForm.formHandler = (data: userSettings) =>
-            this.settingsFormHandler(data);
-        component.formPlaceholder(settingsForm);
+        component.setSettings = this.userSettings;
+        component.setSubmitHandler = (data) => {
+            api.setSettingsData(data);
+            this.userSettings = data;
+        };
     }
 
     changeLinkHandler(slug) {

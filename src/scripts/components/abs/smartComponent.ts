@@ -11,18 +11,27 @@ abstract class SmartComponent extends Component {
 
     abstract getTemplate(): string;
     abstract removeListeners(): void;
+    abstract addListeners(): void;
+
+    getElement(): Element {
+        super.getElement();
+        if (this.addListeners) {
+            this.recoveryListeners();
+        }
+
+        return this.element;
+    }
 
     removeElement() {
         super.removeElement();
         this.components?.map((component) => component.removeElement());
-        console.log(this);
         if (this.removeListeners) {
             this.removeListeners();
         }
     }
 
-    rerender(container: HTMLElement) {
-        utils.render(container, this);
+    recoveryListeners() {
+        this.addListeners();
     }
 }
 
