@@ -1,5 +1,6 @@
 import { userSettings } from '../interfaces';
 import utils from '../utils/utils';
+import SmartComponent from './abs/smartComponent';
 import { Component } from './_index';
 
 const settingsFormTemplate = () => `
@@ -47,7 +48,7 @@ const settingsFormTemplate = () => `
     </form>
 `;
 
-class SettingsForm extends Component {
+class SettingsForm extends SmartComponent {
     settings: userSettings;
     constructor(settings: userSettings) {
         super();
@@ -75,6 +76,10 @@ class SettingsForm extends Component {
                 .classList.remove('hidden');
             handler(formData);
         });
+    }
+
+    removeListeners() {
+        console.log(1);
     }
 
     init() {

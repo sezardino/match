@@ -2,6 +2,7 @@ import Screen from '../components/abs/screen';
 import { GameScreen } from '../components/_index';
 import GameController from '../controllers/game';
 import { SLUGS } from '../utils/constants';
+import utils from '../utils/utils';
 import render from '../utils/utils';
 
 class Router {
@@ -31,18 +32,11 @@ class Router {
 
     changeRoute(props: { current: string; prev: string }): void {
         const { current, prev } = props;
-        const prevPage =
-            prev === SLUGS.GAME ? this.game : this.routes.get(prev);
         const currentPage = this.routes.get(current);
-        const currentUrl = current === 'home' ? '/' : current;
-        history.pushState({ slug: currentUrl }, '', currentUrl);
-        if (prevPage) {
-            prevPage?.removeElement();
-        } else {
-            this.root.innerHTML = '';
-        }
-        currentPage.getElement();
-        render.render(this.root, currentPage);
+        const prevPage = this.routes.get(prev);
+        history.pushState({ slug: current }, '', current);
+        prevPage?.removeElement();
+        utils.render(this.root, currentPage);
     }
 
     refresh() {

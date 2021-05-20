@@ -56,6 +56,8 @@ class PageController {
         this.currentScreen = SLUGS.ABOUT;
 
         this.init();
+
+        this.registerHandler = this.registerHandler.bind(this);
     }
 
     private render(root: string) {
@@ -68,21 +70,18 @@ class PageController {
         utils.renderAE(this.root.element, this.popup);
     }
 
-    private registerForm(): RegisterForm {
+    //
+
+    registerHandler() {
         const form = new RegisterForm();
+        this.popup.open(form);
 
-        form.submitHandler((data) => {
+        form.submitHandler = (data: { name: string }) => {
+            this.popup.close();
             this.user = data;
-            this.checkUser();
-            this.popup.close();
+            this.header.setUser = data;
             api.setUserData(data);
-        });
-
-        form.cancelHandler(() => {
-            this.popup.close();
-        });
-
-        return form;
+        };
     }
 
     startGameHandler() {
@@ -94,53 +93,25 @@ class PageController {
         }
     }
 
-    private checkUser() {
-        if (this.user?.name) {
-            this.userView = new UserView();
-            this.userView.buttonHandler(() => {
-                this.startGameHandler();
-            });
-            this.header.controlUserPlaceHolder(this.userView);
-        } else {
-            this.signIn = new Button({
-                text: 'Register new player',
-                extraClass: 'button--primary'
-            });
-            this.signIn.buttonListener(() =>
-                this.popup.open(this.registerForm())
-            );
-            this.header.controlUserPlaceHolder(this.signIn);
-        }
-    }
-
-    private headerController(): void {
-        this.checkUser();
-        this.nav = new Nav({ currentLink: this.currentScreen });
-        this.nav.linksListener((pathname) => {
-            if (pathname !== this.currentScreen) {
-                const props = {
-                    prev: this.currentScreen,
-                    current: pathname
-                };
-                this.currentScreen = pathname;
-                this.router.changeRoute(props);
-            }
-        });
-        this.header.controlNavPlaceHolder(this.nav);
-    }
-
-    private settingsFormHandler(data: userSettings) {
-        api.setSettingsData(data);
-        this.userSettings = data;
-    }
-
     private settingsHandler() {
         const component = this.screens.settings;
-        const settingsForm = new SettingsForm(this.userSettings);
-        settingsForm.formHandler = (data: userSettings) =>
-            this.settingsFormHandler(data);
-        component.formPlaceholder(settingsForm);
+        component.setSettings = this.userSettings;
+        component.setSubmitHandler = (data) => {
+            api.setSettingsData(data);
+            this.userSettings = data;
+        };
     }
+
+    changeLinkHandler(slug) {
+        const props = {
+            prev: this.currentScreen,
+            current: slug
+        };
+        this.currentScreen = slug;
+        this.router.changeRoute(props);
+    }
+
+    //
 
     private routerInit(): void {
         const { pathname } = location;
@@ -157,11 +128,19 @@ class PageController {
         this.router.onAppLoad(this.currentScreen);
     }
 
+    addHeaderListeners() {
+        const header = this.header;
+
+        header.registerHandler = () => this.registerHandler();
+        header.startGameHandler = () => this.startGameHandler();
+        header.changeLinkHandler = (slug) => this.changeLinkHandler(slug);
+    }
+
     private init() {
         this.render(this.props.root);
         this.routerInit();
 
-        this.headerController();
+        this.addHeaderListeners();
     }
 }
 

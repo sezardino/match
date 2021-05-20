@@ -41,11 +41,11 @@ class Nav extends Component {
     activeLinkClass: string;
     currentLink: string;
     links: NodeListOf<HTMLAnchorElement>;
-    constructor(props: { currentLink: string }) {
+    constructor(currentLink: string) {
         super();
 
         this.activeLinkClass = 'nav__link--current';
-        this.currentLink = props.currentLink;
+        this.currentLink = currentLink;
 
         this.init();
     }
@@ -65,7 +65,7 @@ class Nav extends Component {
         });
     }
 
-    linksListener(handler: (pathname: string) => void): void {
+    set linksListener(handler: (pathname: string) => void) {
         this.links.forEach((link) => {
             link.addEventListener('click', (evt) => {
                 evt.preventDefault();
