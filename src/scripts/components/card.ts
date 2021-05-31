@@ -5,7 +5,7 @@ const cardTemplate = (props: {
     placeholder: string;
     type: string;
 }) => `
-  <button class="play-card">
+  <button class="play-card play-card--${props.placeholder}">
   ${props.value}
     <div class="play-card__image-wrapper">
       <img src="./assets/images/cards/${props.type}/${props.value}.svg" alt="${props.type}" class="play-card__image" />
@@ -13,7 +13,6 @@ const cardTemplate = (props: {
   </button>
 `;
 
-// play-card--${props.placeholder}
 class Card extends Component {
     props: { value: number; placeholder: string; type: string };
     openClass: string;
